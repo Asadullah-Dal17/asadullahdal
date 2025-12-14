@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediaPipe Course — Launching Soon | Asadullah Dal</title>
+  
+  
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<link rel="canonical" href="https://asadullah-dal17.github.io/asadullahdal/mediapipe-course.html" />
+<meta name="description" content="A practical MediaPipe course by Asadullah Dal. Launching soon — hands, pose, face mesh, segmentation, projects, and deployment tips." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    // initial theme detection
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const saved = localStorage.getItem('darkMode');
+    window.initialTheme = saved === null ? (prefersDark ? 'dark' : 'light') : (saved === 'true' ? 'dark' : 'light');
+    if (window.initialTheme === 'dark') document.documentElement.classList.add('dark-mode');
+  </script>
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <meta name="theme-color" content="#2E7D32" />
+</head>
+<body id="top">
+
+  <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+    <i id="darkModeIcon" class="fas fa-moon"></i>
+  </button>
+
+  <nav class="nav" role="navigation">
+    <div class="nav-container">
+      <a href="index.html" class="logo" aria-label="Home">AD</a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="index.html#skills">Skills</a>
+        <a class="nav-link" href="index.html#projects">Projects</a>
+        <a class="nav-link" href="index.html#courses">Courses</a>
+        <a class="nav-link" href="index.html#services">Services</a>
+        <a class="nav-link" href="index.html#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-secondary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20know%20about%20your%20MediaPipe%20course%20launch." target="_blank" rel="noopener">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="section" style="padding-top:8rem;">
+    <div class="container">
+      <div class="course-hero-grid">
+        <div class="course-hero-content">
+          <div class="course-soon-badge"><i class="fas fa-rocket"></i> Launching Soon</div>
+          <h1 class="course-hero-title">MediaPipe Course</h1>
+          <p class="course-hero-subtitle">A practical, project-first course to master <strong>Hands</strong>, <strong>Pose</strong>, <strong>Face Mesh</strong>, <strong>Segmentation</strong> and real-world CV pipelines.</p>
+
+          <!-- Countdown -->
+          <div id="countdown" class="countdown" aria-label="Course launch countdown">
+            <div class="countdown-item"><div id="cd-days" class="countdown-value">--</div><div class="countdown-label">Days</div></div>
+            <div class="countdown-item"><div id="cd-hours" class="countdown-value">--</div><div class="countdown-label">Hours</div></div>
+            <div class="countdown-item"><div id="cd-mins" class="countdown-value">--</div><div class="countdown-label">Minutes</div></div>
+            <div class="countdown-item"><div id="cd-secs" class="countdown-value">--</div><div class="countdown-label">Seconds</div></div>
+          </div>
+          <p id="countdownNote" class="countdown-note"><i class="fas fa-clock"></i> Launch date is configurable. Update <code>COURSE_LAUNCH_ISO</code> inside this page.</p>
+
+          <div class="course-hero-cta">
+            <a class="btn btn-primary" href="#syllabus"><i class="fas fa-list-check"></i> View Syllabus</a>
+            <a class="btn btn-secondary" href="https://github.com/Asadullah-Dal17/AiPhile-Mediapipe-Course" target="_blank" rel="noopener"><i class="fab fa-github"></i> Course Repo</a>
+            <a class="btn btn-primary fiverr-link" href="https://www.fiverr.com/users/asadullahdal482" target="_blank" rel="noopener"><i class="fab fa-fiverr"></i> Hire Me</a>
+          </div>
+
+          <div class="course-note">
+            <i class="fas fa-bell"></i>
+            <div>
+              <strong>Want launch updates?</strong>
+              <div class="course-note-actions">
+                <a class="btn btn-secondary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20Please%20notify%20me%20when%20your%20MediaPipe%20course%20launches." target="_blank" rel="noopener">Notify on WhatsApp</a>
+                <a class="btn btn-secondary" href="mailto:asadullah92c@gmail.com?subject=MediaPipe%20Course%20Launch%20Updates&body=Hi%20Asadullah,%20please%20notify%20me%20when%20the%20MediaPipe%20course%20launches.">Notify by Email</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="course-hero-visual" aria-hidden="true">
+          <div class="course-visual-card"><div class="course-visual-icon"><i class="fas fa-hand"></i></div><div class="course-visual-title">Hands</div><div class="course-visual-desc">Landmarks, gestures, controllers</div></div>
+          <div class="course-visual-card"><div class="course-visual-icon"><i class="fas fa-person-running"></i></div><div class="course-visual-title">Pose</div><div class="course-visual-desc">Workout tracking, posture, angles</div></div>
+          <div class="course-visual-card"><div class="course-visual-icon"><i class="fas fa-face-smile"></i></div><div class="course-visual-title">Face Mesh</div><div class="course-visual-desc">Iris, gaze, filters</div></div>
+          <div class="course-visual-card"><div class="course-visual-icon"><i class="fas fa-layer-group"></i></div><div class="course-visual-title">Segmentation</div><div class="course-visual-desc">Background removal, AR scenes</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="syllabus" class="section">
+    <div class="container">
+      <h2 class="section-title">Syllabus (Planned)</h2>
+      <p class="section-lead">Each module includes a tutorial + multiple projects.</p>
+
+      <div class="syllabus-grid">
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">01</span><h3>Setup & Fundamentals</h3></div><p>Install MediaPipe, run your first landmarks, understand coordinates and tracking basics.</p><div class="syllabus-tags"><span class="tag">Setup</span><span class="tag">Landmarks</span><span class="tag">Basics</span></div></article>
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">02</span><h3>Hands</h3></div><p>Hand landmarks, finger counting, gestures, hand controllers and mini apps.</p><div class="syllabus-tags"><span class="tag">Hands</span><span class="tag">Gestures</span><span class="tag">Projects</span></div></article>
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">03</span><h3>Pose</h3></div><p>Pose landmarks, angle calculation, posture feedback, fitness projects.</p><div class="syllabus-tags"><span class="tag">Pose</span><span class="tag">Angles</span><span class="tag">Tracking</span></div></article>
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">04</span><h3>Face Mesh & Iris</h3></div><p>Face mesh, iris tracking, gaze direction, blink detection projects.</p><div class="syllabus-tags"><span class="tag">Face Mesh</span><span class="tag">Iris</span><span class="tag">Gaze</span></div></article>
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">05</span><h3>Segmentation & AR</h3></div><p>Selfie segmentation, background removal, virtual backgrounds, AR overlays.</p><div class="syllabus-tags"><span class="tag">Segmentation</span><span class="tag">AR</span><span class="tag">UI</span></div></article>
+        <article class="syllabus-card"><div class="syllabus-header"><span class="syllabus-number">06</span><h3>Optimization & Deployment</h3></div><p>FPS optimization, threading basics, deployment tips and best practices.</p><div class="syllabus-tags"><span class="tag">Performance</span><span class="tag">Deployment</span><span class="tag">Best Practices</span></div></article>
+      </div>
+
+      <div class="course-bottom-cta">
+        <a class="btn btn-primary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20enroll%20in%20the%20MediaPipe%20course%20when%20it%20launches." target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Reserve via WhatsApp</a>
+        <a class="btn btn-secondary" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom"><p>© 2024 Asadullah Dal. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== MediaPipe Course Countdown =====
+    // Update this launch date/time (ISO): 2026-01-15T20:00:00+05:00
+    const COURSE_LAUNCH_ISO = '2026-01-15T20:00:00+05:00';
+
+    function pad2(n){ return String(n).padStart(2,'0'); }
+
+    function updateCountdown(){
+      const target = new Date(COURSE_LAUNCH_ISO).getTime();
+      const now = Date.now();
+      const diff = target - now;
+
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
+      const noteEl = document.getElementById('countdownNote');
+      if(!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+      if (isNaN(target)) {
+        daysEl.textContent = '--'; hoursEl.textContent='--'; minsEl.textContent='--'; secsEl.textContent='--';
+        if(noteEl) noteEl.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Invalid launch date. Update <code>COURSE_LAUNCH_ISO</code>.';
+        return;
+      }
+
+      if (diff <= 0) {
+        daysEl.textContent = '00'; hoursEl.textContent='00'; minsEl.textContent='00'; secsEl.textContent='00';
+        if(noteEl) noteEl.innerHTML = '<i class="fas fa-check-circle"></i> The course is live! Check YouTube/GitHub for updates.';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const secs = Math.floor((diff % (1000*60)) / 1000);
+
+      daysEl.textContent = String(days);
+      hoursEl.textContent = pad2(hours);
+      minsEl.textContent = pad2(mins);
+      secsEl.textContent = pad2(secs);
+    }
+
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', () => { updateCountdown(); setInterval(updateCountdown, 1000); });
+    } else {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+  </script>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
