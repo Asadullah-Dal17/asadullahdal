@@ -1,0 +1,32 @@
+{
+  "name": "asadullah-dal-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio website for Asadullah Dal - Computer Vision Developer & AI Educator",
+  "main": "assets/js/app.js",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "echo 'Building for production...'",
+    "minify-css": "echo 'CSS minification would go here'",
+    "minify-js": "echo 'JS minification would go here'",
+    "optimize-images": "echo 'Image optimization would go here'"
+  },
+  "keywords": [
+    "computer-vision",
+    "portfolio",
+    "web-development",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "Asadullah Dal",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Asadullah-Dal17/portfolio"
+  },
+  "homepage": "https://asadullah-dal17.github.io/portfolio/",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
