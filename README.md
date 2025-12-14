@@ -208,10 +208,11 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 📞 Contact
 
 **Asadullah Dal**
-- **Email**: [Your email]
-- **LinkedIn**: [Your LinkedIn]
-- **GitHub**: [Your GitHub]
-- **YouTube**: [Your YouTube]
+- **Email**: asadullah92c@gmail.com
+- **LinkedIn**: [Asadullah Dal](https://www.linkedin.com/in/asadullah-dal/)
+- **GitHub**: [@Asadullah-Dal17](https://github.com/Asadullah-Dal17)
+- **YouTube**: [@asadullah-dal](https://youtube.com/@asadullah-dal)
+- **Instagram**: [@aiphile17](https://www.instagram.com/aiphile17)
 
 ---
 
