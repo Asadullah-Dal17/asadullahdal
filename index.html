@@ -377,97 +377,97 @@
 </head>
 
 <body>
-  <!-- Background Pattern Overlay -->
-  <div class="background-pattern"></div>
-  <div class="background-pattern-ambient"></div>
-  <!-- Skip Link -->
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <!-- Loading Screen -->
-  <div class="loading-screen" id="loading-screen">
-    <div class="loading-container">
-      <div class="loading-logo">
-        <div class="logo-text">AD</div>
+  <!-- Enhanced Cyber Background Animation -->
+  <div class="bg-animated">
+    <div class="bg-particles"></div>
+    <!-- Skip Link -->
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+      <div class="loading-container">
+        <div class="loading-logo">
+          <div class="logo-text">AD</div>
+        </div>
+        <div class="loading-progress">
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+        <div class="loading-text">Loading Portfolio...</div>
       </div>
-      <div class="loading-progress">
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
+      </div>
+    <!-- Dark Mode Toggle -->
+    <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle">
+      <i class="fas fa-moon" id="darkModeIcon"></i>
+    </button>
+    <!-- Search Bar -->
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input aria-label="Search site content" id="searchInput" placeholder="Search projects, courses, skills..."
+            type="text" />
+          <button aria-label="Close search" class="search-close" id="searchClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="search-results" id="searchResults" role="list"></div>
+      </div>
+    </div>
+    <!-- Navigation -->
+    <nav aria-label="Main navigation" class="nav" role="navigation">
+      <div class="nav-container">
+        <a aria-label="Home" class="logo" href="#main-content">AD</a>
+        <div class="nav-links">
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#skills">Skills</a>
+          <a class="nav-link" href="#projects">Projects</a>
+          <a class="nav-link" href="#courses">Courses</a>
+          <a class="nav-link" href="videos.html">YouTube</a>
+          <a class="nav-link" href="blog.html">Blog</a>
+          <a class="nav-link" href="#services">Services</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <button aria-label="Open search" class="search-toggle" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </button>
+          <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
       </div>
-      <div class="loading-text">Loading Portfolio...</div>
-    </div>
-  </div>
-  <!-- Dark Mode Toggle -->
-  <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle">
-    <i class="fas fa-moon" id="darkModeIcon"></i>
-  </button>
-  <!-- Search Bar -->
-  <div class="search-overlay" id="searchOverlay">
-    <div class="search-container">
-      <div class="search-box">
-        <i class="fas fa-search"></i>
-        <input aria-label="Search site content" id="searchInput" placeholder="Search projects, courses, skills..."
-          type="text" />
-        <button aria-label="Close search" class="search-close" id="searchClose">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="search-results" id="searchResults" role="list"></div>
-    </div>
-  </div>
-  <!-- Navigation -->
-  <nav aria-label="Main navigation" class="nav" role="navigation">
-    <div class="nav-container">
-      <a aria-label="Home" class="logo" href="#main-content">AD</a>
-      <div class="nav-links">
-        <a class="nav-link" href="#about">About</a>
-        <a class="nav-link" href="#skills">Skills</a>
-        <a class="nav-link" href="#projects">Projects</a>
-        <a class="nav-link" href="#courses">Courses</a>
-        <a class="nav-link" href="videos.html">YouTube</a>
-        <a class="nav-link" href="blog.html">Blog</a>
-        <a class="nav-link" href="#services">Services</a>
-        <a class="nav-link" href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <button aria-label="Open search" class="search-toggle" id="searchToggle">
-          <i class="fas fa-search"></i>
-        </button>
-        <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
-          <i class="fas fa-bars"></i>
-        </button>
+    </nav>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu">
+        <div class="mobile-menu-header">
+          <div class="mobile-logo">AD</div>
+          <button class="mobile-menu-close" id="mobile-menu-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <nav class="mobile-nav">
+          <a class="mobile-nav-link" href="#about">About</a>
+          <a class="mobile-nav-link" href="#skills">Skills</a>
+          <a class="mobile-nav-link" href="#projects">Projects</a>
+          <a class="mobile-nav-link" href="#courses">Courses</a>
+          <a class="mobile-nav-link" href="videos.html">YouTube</a>
+          <a class="mobile-nav-link" href="blog.html">Blog</a>
+          <a class="mobile-nav-link" href="#services">Services</a>
+          <a class="mobile-nav-link" href="#contact">Contact</a>
+        </nav>
       </div>
     </div>
-  </nav>
-  <!-- Mobile Menu -->
-  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-    <div class="mobile-menu">
-      <div class="mobile-menu-header">
-        <div class="mobile-logo">AD</div>
-        <button class="mobile-menu-close" id="mobile-menu-close">
-          <i class="fas fa-times"></i>
-        </button>
+    <!-- Hero Section -->
+    <section class="hero" id="main-content">
+      <!-- Animated Background Elements -->
+      <div class="hero-background">
+        <div class="hero-gradient-orb orb-1"></div>
+        <div class="hero-gradient-orb orb-2"></div>
+        <div class="hero-gradient-orb orb-3"></div>
+        <div class="hero-grid-pattern"></div>
       </div>
-      <nav class="mobile-nav">
-        <a class="mobile-nav-link" href="#about">About</a>
-        <a class="mobile-nav-link" href="#skills">Skills</a>
-        <a class="mobile-nav-link" href="#projects">Projects</a>
-        <a class="mobile-nav-link" href="#courses">Courses</a>
-        <a class="mobile-nav-link" href="videos.html">YouTube</a>
-        <a class="mobile-nav-link" href="blog.html">Blog</a>
-        <a class="mobile-nav-link" href="#services">Services</a>
-        <a class="mobile-nav-link" href="#contact">Contact</a>
-      </nav>
-    </div>
-  </div>
-  <!-- Hero Section -->
-  <section class="hero" id="main-content">
-    <!-- Animated Background Elements -->
-    <div class="hero-background">
-      <div class="hero-gradient-orb orb-1"></div>
-      <div class="hero-gradient-orb orb-2"></div>
-      <div class="hero-gradient-orb orb-3"></div>
-      <div class="hero-grid-pattern"></div>
-    </div>
     <div class="container">
       <div class="hero-grid">
         <div class="hero-content">
@@ -801,68 +801,6 @@
             <div class="timeline-tags">
               <span class="timeline-tag">Python</span>
               <span class="timeline-tag">Web Development</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Testimonials Section -->
-  <section class="section testimonials-section" id="testimonials">
-    <div class="container">
-      <h2 class="section-title">What Students Say</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Amazing tutorials! Asadullah explains complex computer vision concepts in a way
-            that's easy to understand. His OpenCV course helped me build my first face recognition project."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">JD</div>
-            <div class="author-info">
-              <div class="author-name">John Doe</div>
-              <div class="author-role">Software Developer</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"The MediaPipe course is fantastic! I learned hand tracking and pose estimation
-            quickly. The practical examples are exactly what I needed for my project."</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">SM</div>
-            <div class="author-info">
-              <div class="author-name">Sarah Miller</div>
-              <div class="author-role">AI Researcher</div>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <div class="testimonial-rating">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-          <p class="testimonial-text">"Best computer vision tutorials on YouTube! Clear explanations, practical
-            projects, and always responsive to questions. Highly recommended!"</p>
-          <div class="testimonial-author">
-            <div class="author-avatar">AK</div>
-            <div class="author-info">
-              <div class="author-name">Ahmed Khan</div>
-              <div class="author-role">Computer Vision Engineer</div>
             </div>
           </div>
         </div>
@@ -1872,6 +1810,7 @@
       setTimeout(hide, 3500);
     })();
   </script>
+  </div> <!-- End .bg-animated -->
 
 </body>
 

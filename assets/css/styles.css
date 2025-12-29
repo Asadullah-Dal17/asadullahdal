@@ -83,120 +83,271 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Dynamic Cyber Background */
-.background-pattern {
+/* ================================
+   Cyber Green Background Animation
+   Layers: Gradient (base), Neon Grid (overlay), Particles (top)
+   Accessibility: respects prefers-reduced-motion
+   ================================ */
+
+:root {
+  /* Theme palette - updated to match existing cyber green theme */
+  --bg-0: #071207;    /* near-black green matching dark mode */
+  --bg-1: #0b1a0b;
+  --bg-2: #0e220e;
+  --bg-3: #123012;
+  --neon: #4CAF50;    /* matching accent color */
+  --neon-soft: rgba(76, 175, 80, 0.15);
+
+  /* Opacities - adjusted for better visibility */
+  --grid-opacity: 0.08;
+  --particles-opacity: 0.10;
+
+  /* Timing - optimized for smooth performance */
+  --gradient-speed: 28s;
+  --grid-drift-speed: 120s;
+  --particle-float-speed: 20s;
+  --particle-sway-speed: 32s;
+
+  /* Scale & grid size */
+  --grid-size: 90px;     /* base grid cell */
+  --blur-strength: 0px;  /* set >0 if you want soft blur on grid */
+
+  /* Particle settings */
+  --particle-size: 2px;
+}
+
+/* Container that hosts the background layers */
+.bg-animated {
+  position: relative;              /* allows normal content flow */
+  min-height: 100vh;
+  isolation: isolate;              /* ensure pseudo-elements layer correctly */
+  background: transparent;         /* let animations show through */
+  overflow-x: hidden;              /* avoid horizontal scroll from transforms */
+}
+
+/* Ensure body background doesn't interfere with animations */
+body {
+  background: transparent !important;
+}
+
+/* Base gradient (fixed so content scrolls over it) */
+.bg-animated::before {
+  content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  overflow: hidden;
-  background: var(--bg-primary);
-}
-
-.background-pattern::before {
-  content: '';
-  position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.15;
-  mask-image: radial-gradient(circle at center, black, transparent 85%);
-  -webkit-mask-image: radial-gradient(circle at center, black, transparent 85%);
+  z-index: -3;
+  /* Multi-stop gradient with slow shift - updated colors */
+  background:
+    radial-gradient(120% 120% at 20% 10%, var(--bg-1) 0%, var(--bg-0) 40%, transparent 60%),
+    radial-gradient(120% 120% at 80% 90%, var(--bg-2) 0%, var(--bg-0) 50%, transparent 70%),
+    linear-gradient(135deg, var(--bg-0), var(--bg-1), var(--bg-2), var(--bg-3));
+  background-size: 120% 120%, 120% 120%, 300% 300%;
+  animation: bgGradientShift var(--gradient-speed) ease-in-out infinite;
+  will-change: background-position, transform;
+  pointer-events: none;
 }
 
-/* Scanning Line Effect */
-.background-pattern::after {
-  content: '';
-  position: absolute;
-  top: -100px;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(to bottom, transparent, rgba(76, 175, 80, 0.1), transparent);
-  animation: bgScan 8s linear infinite;
-  opacity: 0.5;
-}
-
-/* Floating Particles (using box-shadow trick) */
-.background-pattern-ambient {
+/* Neon grid overlay */
+.bg-animated::after {
+  content: "";
   position: fixed;
   inset: 0;
+  z-index: -2;
+  background:
+    /* horizontal lines */
+    repeating-linear-gradient(
+      to bottom,
+      rgba(76, 175, 80, var(--grid-opacity)) 0,
+      rgba(76, 175, 80, var(--grid-opacity)) 1px,
+      transparent 1px,
+      transparent var(--grid-size)
+    ),
+    /* vertical lines */
+    repeating-linear-gradient(
+      to right,
+      rgba(76, 175, 80, var(--grid-opacity)) 0,
+      rgba(76, 175, 80, var(--grid-opacity)) 1px,
+      transparent 1px,
+      transparent var(--grid-size)
+    );
+  filter: blur(var(--blur-strength));
+  /* slow drift for parallax vibe */
+  animation: gridDrift var(--grid-drift-speed) linear infinite;
+  will-change: background-position;
   pointer-events: none;
-  z-index: -1;
 }
 
-.background-pattern-ambient::before {
-  content: '';
+/* Particle layer: add a child element <div class="bg-particles"></div> inside .bg-animated */
+.bg-animated .bg-particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--particles-opacity);
+}
+
+/* We generate particles using multiple box-shadows on a pseudo-element */
+.bg-animated .bg-particles::before,
+.bg-animated .bg-particles::after {
+  content: "";
   position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--accent);
-  box-shadow:
-    10vw 20vh 0 var(--accent),
-    30vw 50vh 0 var(--accent),
-    70vw 10vh 0 var(--accent),
-    90vw 80vh 0 var(--accent),
-    40vw 90vh 0 var(--accent),
-    20vw 40vh 0 var(--accent),
-    60vw 60vh 0 var(--accent),
-    80vw 30vh 0 var(--accent);
+  width: var(--particle-size);
+  height: var(--particle-size);
   border-radius: 50%;
-  opacity: 0.3;
-  animation: bgFloat 20s infinite linear;
+  background: var(--neon);
+  box-shadow:
+    /* Cluster A (random positions; tune freely) */
+    5vw   12vh 0 0 var(--neon),
+    18vw  28vh 0 0 var(--neon),
+    32vw   6vh 0 0 var(--neon),
+    47vw  22vh 0 0 var(--neon),
+    64vw  10vh 0 0 var(--neon),
+    79vw  18vh 0 0 var(--neon),
+    12vw  44vh 0 0 var(--neon),
+    28vw  56vh 0 0 var(--neon),
+    42vw  68vh 0 0 var(--neon),
+    58vw  40vh 0 0 var(--neon),
+    72vw  52vh 0 0 var(--neon),
+    88vw  34vh 0 0 var(--neon),
+    16vw  76vh 0 0 var(--neon),
+    36vw  84vh 0 0 var(--neon),
+    54vw  88vh 0 0 var(--neon);
+  animation: particleFloat var(--particle-float-speed) ease-in-out infinite,
+             particleSway  var(--particle-sway-speed)  linear      infinite;
+  filter: drop-shadow(0 0 6px var(--neon-soft));
 }
 
-@keyframes bgPulse {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(1.1);
-  }
+/* Second cluster (to add richness) */
+.bg-animated .bg-particles::after {
+  top: 0; left: 0;
+  box-shadow:
+    10vw  18vh 0 0 var(--neon),
+    24vw  30vh 0 0 var(--neon),
+    38vw  14vh 0 0 var(--neon),
+    52vw  26vh 0 0 var(--neon),
+    66vw   8vh 0 0 var(--neon),
+    82vw  20vh 0 0 var(--neon),
+    14vw  48vh 0 0 var(--neon),
+    30vw  60vh 0 0 var(--neon),
+    46vw  72vh 0 0 var(--neon),
+    60vw  44vh 0 0 var(--neon),
+    76vw  56vh 0 0 var(--neon),
+    90vw  38vh 0 0 var(--neon),
+    20vw  80vh 0 0 var(--neon),
+    40vw  88vh 0 0 var(--neon),
+    58vw  92vh 0 0 var(--neon);
+  animation: particleFloat var(--particle-float-speed) ease-in-out infinite reverse,
+             particleSway  calc(var(--particle-sway-speed) * 1.2) linear      infinite;
+  filter: drop-shadow(0 0 6px var(--neon-soft));
+}
 
-  50% {
-    transform: translate(-45%, -55%) rotate(5deg) scale(1);
-  }
+/* ================================
+   Keyframes
+   ================================ */
 
-  100% {
-    transform: translate(-55%, -45%) rotate(-5deg) scale(1.1);
+@keyframes bgGradientShift {
+  0%   { background-position: 0% 50%, 100% 50%,   0% 50%; transform: translateZ(0); }
+  50%  { background-position: 100% 50%, 0%   50%, 100% 50%; }
+  100% { background-position: 0% 50%, 100% 50%,   0% 50%; }
+}
+
+@keyframes gridDrift {
+  0%   { background-position: 0 0, 0 0; }
+  50%  { background-position: -8vw -6vh, 8vw 6vh; }
+  100% { background-position: 0 0, 0 0; }
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(-3px); }
+  50%      { transform: translateY(3px); }
+}
+
+@keyframes particleSway {
+  0%   { transform: translateX(-2px); }
+  50%  { transform: translateX(2px); }
+  100% { transform: translateX(-2px); }
+}
+
+/* ================================
+   Accessibility: Reduced Motion
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-animated::before,
+  .bg-animated::after,
+  .bg-animated .bg-particles::before,
+  .bg-animated .bg-particles::after {
+    animation: none !important;
+  }
+  .bg-animated::before {
+    /* provide a static but rich background */
+    background:
+      radial-gradient(120% 120% at 20% 10%, var(--bg-1) 0%, var(--bg-0) 40%, transparent 60%),
+      radial-gradient(120% 120% at 80% 90%, var(--bg-2) 0%, var(--bg-0) 50%, transparent 70%),
+      linear-gradient(135deg, var(--bg-0), var(--bg-1), var(--bg-2), var(--bg-3));
+    background-size: cover;
   }
 }
 
-@keyframes bgScan {
-  0% {
-    transform: translateY(0);
+/* ================================
+   Mobile Performance Optimizations
+   ================================ */
+
+@media (max-width: 768px) {
+  .bg-animated {
+    --gradient-speed: 45s;      /* slower on mobile */
+    --grid-drift-speed: 180s;   /* much slower drift */
+    --particle-float-speed: 35s; /* slower particles */
+    --particle-sway-speed: 50s;  /* slower sway */
   }
 
-  100% {
-    transform: translateY(110vh);
-  }
-}
-
-@keyframes bgFloat {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  50% {
-    transform: translate(20px, -30px);
-  }
-
-  100% {
-    transform: translate(0, 0);
+  .bg-animated .bg-particles::before,
+  .bg-animated .bg-particles::after {
+    filter: blur(0.2px); /* reduce blur for better performance */
   }
 }
 
-.dark-mode .background-pattern {
-  opacity: 0.6;
+@media (max-width: 480px) {
+  .bg-animated {
+    --particles-opacity: 0.06;  /* reduce opacity on small screens */
+    --grid-opacity: 0.04;       /* reduce grid visibility */
+  }
+
+  /* Reduce particle count on very small screens */
+  .bg-animated .bg-particles::before {
+    box-shadow:
+      5vw   12vh 0 0 var(--neon),
+      32vw   6vh 0 0 var(--neon),
+      64vw  10vh 0 0 var(--neon),
+      12vw  44vh 0 0 var(--neon),
+      42vw  68vh 0 0 var(--neon),
+      72vw  52vh 0 0 var(--neon),
+      16vw  76vh 0 0 var(--neon);
+  }
+
+  .bg-animated .bg-particles::after {
+    box-shadow:
+      10vw  18vh 0 0 var(--neon),
+      38vw  14vh 0 0 var(--neon),
+      66vw   8vh 0 0 var(--neon),
+      14vw  48vh 0 0 var(--neon),
+      46vw  72vh 0 0 var(--neon),
+      76vw  56vh 0 0 var(--neon),
+      20vw  80vh 0 0 var(--neon);
+  }
 }
 
-.dark-mode .background-pattern::before {
-  opacity: 0.08;
-  background-image:
-    linear-gradient(var(--accent) 1px, transparent 1px),
-    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+/* ================================
+   Optional: Dark overlay to boost contrast
+   Place a <div class="bg-veil"></div> after .bg-animated start (if needed)
+   ================================ */
+
+.bg-animated .bg-veil {
+  position: fixed;
+  inset: 0;
+  z-index: -0;
+  pointer-events: none;
+  background: radial-gradient(100% 100% at 50% 50%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.28) 100%);
 }
 
 
@@ -771,15 +922,16 @@ body::after {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border);
-  transition: var(--transition);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+  transition: all 0.4s ease;
 }
 
 .dark-mode .nav {
-  background: rgba(10, 26, 10, 0.95);
-  border-bottom: 1px solid var(--border);
+  background: rgba(10, 26, 10, 0.6);
+  border-bottom: 1px solid rgba(76, 175, 80, 0.2);
 }
 
 .nav-container {
@@ -1253,8 +1405,11 @@ body::after {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(46, 125, 50, 0.6));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
   position: relative;
   overflow: hidden;
@@ -1279,15 +1434,18 @@ body::after {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--accent-hover), var(--accent));
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+  background: rgba(76, 175, 80, 0.9);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 25px rgba(76, 175, 80, 0.6), 0 0 10px rgba(76, 175, 80, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
-  background: transparent;
+  background: rgba(76, 175, 80, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--accent);
-  border: 2px solid var(--accent);
+  border: 2px solid rgba(76, 175, 80, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -1413,6 +1571,7 @@ body::after {
   font-size: 1.8rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1431,6 +1590,7 @@ body::after {
   font-weight: 900;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--font-mono);
   margin-bottom: 0.5rem;
@@ -1796,6 +1956,7 @@ body::after {
   text-align: center;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1895,6 +2056,7 @@ body::after {
   margin-bottom: 0.5rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1915,14 +2077,14 @@ body::after {
 }
 
 .about-text-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(76, 175, 80, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(76, 175, 80, 0.2);
   border-radius: 24px;
   padding: 3rem;
   margin-bottom: 2rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(76, 175, 80, 0.1) inset;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -1942,8 +2104,8 @@ body::after {
 
 .about-text-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.25), 0 0 0 1px rgba(76, 175, 80, 0.15) inset;
-  border-color: rgba(76, 175, 80, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 20px rgba(76, 175, 80, 0.3);
+  border-color: rgba(76, 175, 80, 0.6);
 }
 
 .about-text-card:hover::after {
@@ -2108,6 +2270,7 @@ body::after {
   font-size: 2.2rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
@@ -2473,10 +2636,10 @@ body::after {
 
 /* Skill Card - Modern Design */
 .skill-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(76, 175, 80, 0.25);
+  border: 1px solid rgba(76, 175, 80, 0.15);
   border-radius: 24px;
   padding: 2.5rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2485,7 +2648,7 @@ body::after {
   display: flex;
   flex-direction: column;
   height: 100%;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(76, 175, 80, 0.1) inset;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
 }
 
 .skill-card::before {
@@ -2518,8 +2681,8 @@ body::after {
 
 .skill-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.3), 0 0 0 1px rgba(76, 175, 80, 0.2) inset;
-  border-color: rgba(76, 175, 80, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 25px rgba(76, 175, 80, 0.4), 0 0 0 1px rgba(76, 175, 80, 0.2) inset;
+  border-color: rgba(76, 175, 80, 0.6);
 }
 
 .skill-card:hover::before {
@@ -2560,6 +2723,7 @@ body::after {
   font-size: 2rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
   transition: transform 0.4s ease;
@@ -2803,14 +2967,14 @@ body::after {
 }
 
 .project-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(76, 175, 80, 0.25);
+  border: 1px solid rgba(76, 175, 80, 0.15);
   border-radius: 24px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(76, 175, 80, 0.1) inset;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   position: relative;
 }
 
@@ -2830,8 +2994,8 @@ body::after {
 
 .project-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(76, 175, 80, 0.3), 0 0 0 1px rgba(76, 175, 80, 0.2) inset;
-  border-color: rgba(76, 175, 80, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 25px rgba(76, 175, 80, 0.4), 0 0 0 1px rgba(76, 175, 80, 0.2) inset;
+  border-color: rgba(76, 175, 80, 0.6);
 }
 
 .project-card:hover::before {
@@ -3201,6 +3365,7 @@ body::after {
   font-size: 2rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
@@ -4257,13 +4422,16 @@ body::after {
 
 .timeline-content {
   width: calc(50% - 2rem);
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(76, 175, 80, 0.2);
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(76, 175, 80, 0.2) !important;
+  padding: 1.5rem !important;
+  border-radius: 20px !important;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  opacity: 0;
+  transform: translateY(30px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
@@ -4276,10 +4444,48 @@ body::after {
   margin-right: 2rem;
 }
 
+.timeline-content.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item:nth-child(1) .timeline-content {
+  transition-delay: 0.1s;
+}
+
+.timeline-item:nth-child(2) .timeline-content {
+  transition-delay: 0.2s;
+}
+
+.timeline-item:nth-child(3) .timeline-content {
+  transition-delay: 0.3s;
+}
+
+.timeline-item:nth-child(4) .timeline-content {
+  transition-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-content {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .background-pattern,
+  .background-pattern::before,
+  .background-pattern::after,
+  .background-pattern-ambient::before,
+  .background-pattern-ambient::after {
+    animation: none !important;
+  }
+}
+
 .timeline-content:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(76, 175, 80, 0.4);
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: var(--accent) !important;
+  box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .dark-mode .timeline-content {
@@ -5111,6 +5317,7 @@ img.loaded {
   margin: 0 0 1rem 0;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--font-heading);
   font-weight: 800;
@@ -5371,6 +5578,7 @@ img.loaded {
   font-weight: 900;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2rem;
   line-height: 1;
@@ -5559,6 +5767,7 @@ img.loaded {
 .course-hero-description strong {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   position: relative;
@@ -5687,6 +5896,7 @@ img.loaded {
   display: block;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   font-size: 1.1rem;
@@ -5746,6 +5956,7 @@ img.loaded {
   font-size: 2rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 4px rgba(76, 175, 80, 0.3));
   transition: all 0.3s ease;
@@ -5773,6 +5984,7 @@ img.loaded {
 .quick-stat strong {
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 900;
   display: block;
@@ -6206,6 +6418,7 @@ img.loaded {
   font-size: 1.4rem;
   background: linear-gradient(135deg, var(--accent), var(--accent-light));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.25rem;
   box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
@@ -6289,6 +6502,7 @@ img.loaded {
   background: linear-gradient(135deg, var(--accent), var(--accent-light), var(--accent));
   background-size: 200% 100%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradientShift 3s linear infinite;
   position: relative;
@@ -7551,6 +7765,24 @@ h5 {
 .section-title {
   position: relative;
   padding-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(76, 175, 80, 0.3));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 8px rgba(76, 175, 80, 0.6));
+  }
 }
 
 .section-title::after {
@@ -7572,6 +7804,30 @@ h5 {
   font-weight: 600 !important;
   letter-spacing: 0.02em !important;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  isolation: isolate;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4) !important;
+}
+
+.btn-primary:hover {
+  animation: btnPulse 2s infinite;
+}
+
+@keyframes btnPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
 }
 
 .btn::before {
@@ -7719,6 +7975,21 @@ h5 {
   background: var(--accent) !important;
   border: 4px solid rgba(76, 175, 80, 0.2) !important;
   box-shadow: 0 0 0 8px rgba(76, 175, 80, 0.1) !important;
+  animation: markerPulse 2.5s infinite;
+}
+
+@keyframes markerPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(76, 175, 80, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
 }
 
 .timeline-content {

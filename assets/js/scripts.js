@@ -11,7 +11,7 @@
 'use strict';
 
 /* ---------- Helpers ---------- */
-const qs  = (sel, root = document) => root.querySelector(sel);
+const qs = (sel, root = document) => root.querySelector(sel);
 const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 /* ---------- Loader (never stuck) ---------- */
@@ -81,11 +81,10 @@ function showNotification(message, type = 'info') {
   const el = document.createElement('div');
   el.className = `notification notification-${type}`;
   el.innerHTML = `
-    <i class="fas fa-${
-      type === 'success' ? 'check-circle'
+    <i class="fas fa-${type === 'success' ? 'check-circle'
       : type === 'error' ? 'exclamation-triangle'
-      : type === 'warning' ? 'exclamation-circle'
-      : 'info-circle'
+        : type === 'warning' ? 'exclamation-circle'
+          : 'info-circle'
     }"></i>
     <span>${message}</span>
   `;
@@ -205,6 +204,19 @@ function setupAnimations() {
   }, { threshold: 0.35 });
 
   skillItems.forEach(item => skillObserver.observe(item));
+
+  // Timeline Animations
+  const timelineItems = qsa('.timeline-content');
+  const timelineObserver = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  timelineItems.forEach(item => timelineObserver.observe(item));
 
   const sections = qsa('section[id]');
   window.addEventListener('scroll', () => {
