@@ -36,8 +36,51 @@ jobs:
           CHANNEL_ID = 'UC6I5v921m_XS8HsVL8IChMQ'
           
           print(f'Using Channel ID: {CHANNEL_ID}')
+          
+          def fetch_stats(channel_handle):
+               try:
+                  url = f'https://www.youtube.com/{channel_handle}'
+                  print(f'Fetching channel page for stats: {url}')
+                  # User-Agent needed for scraping
+                  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+                  r = requests.get(url, headers=headers)
+                  r.raise_for_status()
+                  
+                  # Initial stats object
+                  stats = {
+                    'subscribers': 'N/A',
+                    'videos': 'N/A',
+                    'views': 'N/A'
+                  }
 
-          # 1. Fetch RSS Feed
+                  # Try to find subscriber count in meta tags or specific JSON patterns
+                  # Pattern 1: "subscriberCountText":{"accessibility":{"accessibilityData":{"label":"4.18K subscribers"}},"simpleText":"4.18K subscribers"}
+                  sub_match = re.search(r'"subscriberCountText":\{.*?"simpleText":"(.*?)"\}', r.text)
+                  if sub_match:
+                      stats['subscribers'] = sub_match.group(1).split(' ')[0] # "4.18K"
+                  
+                  # Pattern 2: "videosCountText":{"accessibility":{"accessibilityData":{"label":"54 videos"}},"simpleText":"54 videos"}
+                  vid_match = re.search(r'"videosCountText":\{.*?"simpleText":"(.*?)"\}', r.text)
+                  if vid_match:
+                      stats['videos'] = vid_match.group(1).split(' ')[0] # "54"
+                  
+                  # Pattern 3: View count usually on About page, simpler to skip or just rely on sub count for now
+                  # A lot of times scraping views requires loading the about tab which is a different URL.
+                  
+                  print(f"Scraped stats: {stats}")
+                  return stats
+               except Exception as e:
+                  print(f"Error scraping stats: {e}")
+                  return None
+
+          # 1. Fetch Stats
+          # Use handle from user
+          channel_handle = '@asadullah-dal'
+          stats = fetch_stats(channel_handle)
+          if not stats: 
+              stats = {'subscribers': '4K+', 'videos': '50+', 'views': '100K+'} # Fallback
+
+          # 2. Fetch RSS Feed
           rss_url = f'https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}'
           print(f'Fetching RSS: {rss_url}')
           try:
@@ -45,51 +88,60 @@ jobs:
               response.raise_for_status()
           except Exception as e:
               print(f'::error::Failed to fetch RSS feed: {e}')
+              # If RSS fails but we have previous data, we might want to keep it, but here we exit
               exit(1)
 
-          # 2. Parse XML
+          # 3. Parse XML
           try:
               root = ET.fromstring(response.content)
               ns = '{http://www.w3.org/2005/Atom}'
               media_ns = '{http://search.yahoo.com/mrss/}'
               yt_ns = '{http://www.youtube.com/xml/schemas/2015}'
 
-              entry = root.find(f'{ns}entry')
-              if entry is None:
+              entries = root.findall(f'{ns}entry')
+              if not entries:
                   print('No videos found in RSS feed.')
                   exit(0)
 
-              video_id = entry.find(f'{yt_ns}videoId').text
-              title = entry.find(f'{ns}title').text
-              published = entry.find(f'{ns}published').text
-              
-              # Thumbnail: RSS usually provides media:group -> media:thumbnail
-              media_group = entry.find(f'{media_ns}group')
-              thumbnail = media_group.find(f'{media_ns}thumbnail').attrib['url']
-              
-              # High res thumbnail usually exists at maxresdefault
-              hq_thumbnail = f'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg'
-              
-              # Verify HQ thumbnail exists, else fallback to RSS one
-              try:
-                  r_thumb = requests.head(hq_thumbnail, timeout=5)
-                  final_thumbnail = hq_thumbnail if r_thumb.status_code == 200 else thumbnail
-              except:
-                  final_thumbnail = thumbnail
+              videos = []
+              # Get top 6 videos
+              for entry in entries[:6]:
+                  video_id = entry.find(f'{yt_ns}videoId').text
+                  title = entry.find(f'{ns}title').text
+                  published = entry.find(f'{ns}published').text
+                  
+                  media_group = entry.find(f'{media_ns}group')
+                  thumbnail = media_group.find(f'{media_ns}thumbnail').attrib['url']
+                  
+                  hq_thumbnail = f'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg'
+                  
+                  # Verify HQ thumbnail (fast check)
+                  try:
+                      r_thumb = requests.head(hq_thumbnail, timeout=2)
+                      final_thumbnail = hq_thumbnail if r_thumb.status_code == 200 else thumbnail
+                  except:
+                      final_thumbnail = thumbnail
 
-              data = {
-                  'videoId': video_id,
-                  'title': title,
-                  'published': published,
-                  'thumbnail': final_thumbnail
+                  videos.append({
+                      'videoId': video_id,
+                      'title': title,
+                      'published': published,
+                      'thumbnail': final_thumbnail
+                  })
+              
+              print(f'Found {len(videos)} videos.')
+
+              # Combine Data
+              final_data = {
+                  'stats': stats,
+                  'videos': videos,
+                  'lastUpdated': datetime.now().isoformat()
               }
-              
-              print(f'Latest Video: {title} ({video_id})')
 
-              # 3. Save JSON
+              # 4. Save JSON
               os.makedirs('data', exist_ok=True)
-              with open('data/latest-video.json', 'w') as f:
-                  json.dump(data, f, indent=2)
+              with open('data/recent-videos.json', 'w') as f:
+                  json.dump(final_data, f, indent=2)
                   
           except Exception as e:
               print(f'::error::Failed to parse XML or extract data: {e}')

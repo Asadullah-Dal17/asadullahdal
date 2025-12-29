@@ -1,0 +1,45 @@
+{
+  "stats": {
+    "subscribers": "N/A",
+    "videos": "N/A"
+  },
+  "videos": [
+    {
+      "videoId": "NoSr16hNR6k",
+      "title": "Without any Extension Visual Studio Code",
+      "published": "2022-06-27T01:14:10+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/NoSr16hNR6k/maxresdefault.jpg"
+    },
+    {
+      "videoId": "B5vZkqiXvJ8",
+      "title": "Path IntelliSense Extension || Visual Studio Code",
+      "published": "2022-06-27T01:09:53+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/B5vZkqiXvJ8/maxresdefault.jpg"
+    },
+    {
+      "videoId": "2xa9_A8HH3U",
+      "title": "Auto DocString Extension || Visual Studio Code",
+      "published": "2022-06-27T01:08:11+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/2xa9_A8HH3U/maxresdefault.jpg"
+    },
+    {
+      "videoId": "ePaF2AJgq9M",
+      "title": "IntelliCode Extension || Visual Studio Code",
+      "published": "2022-06-27T01:07:01+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/ePaF2AJgq9M/maxresdefault.jpg"
+    },
+    {
+      "videoId": "QKQPVZUxcNI",
+      "title": "Black Formatter Extension || Visual Studio Code",
+      "published": "2022-06-27T00:57:34+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/QKQPVZUxcNI/maxresdefault.jpg"
+    },
+    {
+      "videoId": "QjaEILG1kR4",
+      "title": "Code Spell Checker Extension || Visual Studio Code",
+      "published": "2022-06-27T00:56:02+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/QjaEILG1kR4/maxresdefault.jpg"
+    }
+  ],
+  "lastUpdated": "2025-12-29T09:36:13.466473"
+}
