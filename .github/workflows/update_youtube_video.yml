@@ -1,0 +1,105 @@
+name: Update Latest YouTube Video
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # Runs every 12 hours
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch Latest Video
+
+        run: |
+          python -c "
+          import requests
+          import xml.etree.ElementTree as ET
+          import json
+          import re
+          import os
+          from datetime import datetime
+
+          # Configuration
+          # Channel ID provided by user
+          CHANNEL_ID = 'UC6I5v921m_XS8HsVL8IChMQ'
+          
+          print(f'Using Channel ID: {CHANNEL_ID}')
+
+          # 1. Fetch RSS Feed
+          rss_url = f'https://www.youtube.com/feeds/videos.xml?channel_id={CHANNEL_ID}'
+          print(f'Fetching RSS: {rss_url}')
+          try:
+              response = requests.get(rss_url)
+              response.raise_for_status()
+          except Exception as e:
+              print(f'::error::Failed to fetch RSS feed: {e}')
+              exit(1)
+
+          # 2. Parse XML
+          try:
+              root = ET.fromstring(response.content)
+              ns = '{http://www.w3.org/2005/Atom}'
+              media_ns = '{http://search.yahoo.com/mrss/}'
+              yt_ns = '{http://www.youtube.com/xml/schemas/2015}'
+
+              entry = root.find(f'{ns}entry')
+              if entry is None:
+                  print('No videos found in RSS feed.')
+                  exit(0)
+
+              video_id = entry.find(f'{yt_ns}videoId').text
+              title = entry.find(f'{ns}title').text
+              published = entry.find(f'{ns}published').text
+              
+              # Thumbnail: RSS usually provides media:group -> media:thumbnail
+              media_group = entry.find(f'{media_ns}group')
+              thumbnail = media_group.find(f'{media_ns}thumbnail').attrib['url']
+              
+              # High res thumbnail usually exists at maxresdefault
+              hq_thumbnail = f'https://i.ytimg.com/vi/{video_id}/maxresdefault.jpg'
+              
+              # Verify HQ thumbnail exists, else fallback to RSS one
+              try:
+                  r_thumb = requests.head(hq_thumbnail, timeout=5)
+                  final_thumbnail = hq_thumbnail if r_thumb.status_code == 200 else thumbnail
+              except:
+                  final_thumbnail = thumbnail
+
+              data = {
+                  'videoId': video_id,
+                  'title': title,
+                  'published': published,
+                  'thumbnail': final_thumbnail
+              }
+              
+              print(f'Latest Video: {title} ({video_id})')
+
+              # 3. Save JSON
+              os.makedirs('data', exist_ok=True)
+              with open('data/latest-video.json', 'w') as f:
+                  json.dump(data, f, indent=2)
+                  
+          except Exception as e:
+              print(f'::error::Failed to parse XML or extract data: {e}')
+              exit(1)
+          "
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add data/latest-video.json
+          git commit -m "Update latest video" || exit 0
+          git push

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Latest Videos | Asadullah Dal</title>
+    <meta name="description"
+        content="Watch the latest computer vision tutorials and tech reviews from Asadullah Dal." />
+
+    <!-- Favicon -->
+    <link
+        href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;&lt;text y=".9em" font-size="90" fill="%234CAF50"&gt;AD&lt;/text&gt;&lt;/svg&gt;'
+        rel="icon" type="image/svg+xml" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- Styles -->
+    <link href="assets/css/styles.css" rel="stylesheet" />
+
+    <style>
+        /* Specific styles for videos.html */
+        .video-hero {
+            padding: 180px 0 100px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .video-card-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .latest-video-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .latest-video-card:hover {
+            box-shadow: 0 20px 60px rgba(76, 175, 80, 0.15);
+            border-color: var(--accent-light);
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio */
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .latest-video-card:hover .video-thumbnail {
+            transform: scale(1.05);
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .latest-video-card:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 0, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .latest-video-card:hover .play-button {
+            transform: scale(1);
+        }
+
+        .video-content {
+            padding: 2.5rem;
+        }
+
+        .video-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .video-badge {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            color: var(--text-heading);
+        }
+
+        .video-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-youtube {
+            background: #ff0000;
+            color: white;
+            border: none;
+        }
+
+        .btn-youtube:hover {
+            background: #cc0000;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .video-hero {
+                padding: 120px 0 60px;
+            }
+
+            .video-content {
+                padding: 1.5rem;
+            }
+
+            .video-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Theme setup from existing site
+        (function () {
+            const darkMode = localStorage.getItem('darkMode') === 'true' ||
+                (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (darkMode) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            window.initialTheme = darkMode ? 'dark' : 'light';
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- Background Pattern (Reused) -->
+    <div class="background-pattern"></div>
+
+    <!-- Loading Screen (Reused) -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <div class="logo-text">AD</div>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="loading-text">Loading Latest Video...</div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a aria-label="Home" class="logo" href="index.html">AD</a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html#about">About</a>
+                <a class="nav-link" href="index.html#skills">Skills</a>
+                <a class="nav-link" href="index.html#projects">Projects</a>
+                <a class="nav-link" href="index.html#courses">Courses</a>
+                <a class="nav-link active" href="videos.html">YouTube</a>
+                <a class="nav-link" href="index.html#contact">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
+                    style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
+                    <i class="fas fa-moon" id="darkModeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Video Hero Section -->
+    <section class="video-hero">
+        <div class="container">
+            <div class="video-card-container">
+
+                <div class="latest-video-card" id="video-card" style="opacity: 0; transform: translateY(20px);">
+                    <div class="video-thumbnail-wrapper">
+                        <!-- Placeholder Image -->
+                        <img src="" alt="Video Thumbnail" class="video-thumbnail" id="vid-thumbnail">
+                        <a href="#" target="_blank" class="play-overlay" id="vid-link-overlay">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="video-content">
+                        <div class="video-meta">
+                            <span class="video-badge">
+                                <i class="fab fa-youtube"></i> LATEST
+                            </span>
+                            <span id="vid-date"><i class="far fa-clock"></i> Loading date...</span>
+                        </div>
+
+                        <h1 class="video-title" id="vid-title">Loading latest video title...</h1>
+
+                        <div class="video-actions">
+                            <a href="#" target="_blank" class="btn btn-primary btn-youtube" id="vid-btn-watch">
+                                <i class="fas fa-play"></i> Watch Video
+                            </a>
+                            <a href="https://youtube.com/@asadullah-dal" target="_blank" class="btn btn-secondary">
+                                <i class="fas fa-bell"></i> Subscribe
+                            </a>
+                            <a href="index.html" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2024 Asadullah Dal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/scripts.js"></script>
+    <script>
+        // Fetch and Render Video Data
+        async function loadLatestVideo() {
+            try {
+                const response = await fetch('data/latest-video.json');
+                if (!response.ok) throw new Error('Failed to load video data');
+
+                const data = await response.json();
+
+                // Update elements
+                document.getElementById('vid-title').textContent = data.title;
+                document.getElementById('vid-thumbnail').src = data.thumbnail;
+
+                // Format date
+                const date = new Date(data.published);
+                document.getElementById('vid-date').innerHTML = `<i class="far fa-clock"></i> ${date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
+
+                // Update links
+                const videoUrl = `https://www.youtube.com/watch?v=${data.videoId}`;
+                document.getElementById('vid-link-overlay').href = videoUrl;
+                document.getElementById('vid-btn-watch').href = videoUrl;
+
+                // Animate in
+                const card = document.getElementById('video-card');
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+
+            } catch (error) {
+                console.error('Error loading video:', error);
+                document.getElementById('vid-title').textContent = "Could not load latest video.";
+                document.getElementById('video-card').style.opacity = '1';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadLatestVideo);
+    </script>
+</body>
+
+</html>
