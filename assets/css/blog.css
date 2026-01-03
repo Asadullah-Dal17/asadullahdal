@@ -11,7 +11,7 @@
 .blog-hero h1 {
     font-size: clamp(2rem, 8vw, 4rem);
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+    background: linear-gradient(135deg, #1B5E20 0%, #66BB6A 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

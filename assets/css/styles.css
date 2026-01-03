@@ -142,7 +142,6 @@ body {
     radial-gradient(120% 120% at 80% 90%, var(--bg-2) 0%, var(--bg-0) 50%, transparent 70%),
     linear-gradient(135deg, var(--bg-0), var(--bg-1), var(--bg-2), var(--bg-3));
   background-size: 120% 120%, 120% 120%, 300% 300%;
-  animation: bgGradientShift var(--gradient-speed) ease-in-out infinite;
   will-change: background-position, transform;
   pointer-events: none;
 }
@@ -172,7 +171,6 @@ body {
     );
   filter: blur(var(--blur-strength));
   /* slow drift for parallax vibe */
-  animation: gridDrift var(--grid-drift-speed) linear infinite;
   will-change: background-position;
   pointer-events: none;
 }
@@ -212,8 +210,6 @@ body {
     16vw  76vh 0 0 var(--neon),
     36vw  84vh 0 0 var(--neon),
     54vw  88vh 0 0 var(--neon);
-  animation: particleFloat var(--particle-float-speed) ease-in-out infinite,
-             particleSway  var(--particle-sway-speed)  linear      infinite;
   filter: drop-shadow(0 0 6px var(--neon-soft));
 }
 
@@ -236,8 +232,6 @@ body {
     20vw  80vh 0 0 var(--neon),
     40vw  88vh 0 0 var(--neon),
     58vw  92vh 0 0 var(--neon);
-  animation: particleFloat var(--particle-float-speed) ease-in-out infinite reverse,
-             particleSway  calc(var(--particle-sway-speed) * 1.2) linear      infinite;
   filter: drop-shadow(0 0 6px var(--neon-soft));
 }
 
@@ -563,7 +557,6 @@ body::after {
     10% calc(100% - 50px),
     0 0,
     8px 8px;
-  animation: floatShapes 30s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
   opacity: 0.9;
@@ -664,7 +657,6 @@ body::before {
     200px 200px,
     16px 16px,
     32px 32px;
-  animation: patternMove 60s linear infinite;
   pointer-events: none;
   z-index: -1;
   /* Fix: Ensure pattern stays behind content */
@@ -1154,7 +1146,6 @@ body::after {
     linear-gradient(90deg, rgba(76, 175, 80, 0.03) 1px, transparent 1px);
   background-size: 100px 100px;
   opacity: 0.5;
-  animation: gridShift 20s linear infinite;
 }
 
 @keyframes gridShift {
@@ -1250,7 +1241,7 @@ body::after {
 .title-line-1,
 .title-line-2 {
   display: block;
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 50%, #81C784 100%);
+  background: linear-gradient(135deg, #0D4A2B 0%, #2E7D32 50%, #66BB6A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1263,7 +1254,7 @@ body::after {
 
 .title-line-2 {
   animation: slideInLeft 0.8s ease-out 0.5s both;
-  background: linear-gradient(135deg, #81C784 0%, var(--accent-light) 50%, var(--accent) 100%);
+  background: linear-gradient(135deg, #66BB6A 0%, #2E7D32 50%, #0D4A2B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1561,15 +1552,15 @@ body::after {
 .stat-icon-wrapper {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.15));
-  border: 2px solid rgba(76, 175, 80, 0.3);
+  background: linear-gradient(135deg, rgba(13, 74, 43, 0.2), rgba(46, 125, 50, 0.15));
+  border: 2px solid rgba(102, 187, 106, 0.3);
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.25rem;
   font-size: 1.8rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1588,7 +1579,7 @@ body::after {
 .stat-value {
   font-size: 2.5rem;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1954,7 +1945,7 @@ body::after {
   font-weight: 800;
   margin-bottom: 3rem;
   text-align: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2054,7 +2045,7 @@ body::after {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 0.5rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2261,14 +2252,14 @@ body::after {
   width: 80px;
   height: 80px;
   margin: 0 auto 1.5rem;
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(46, 125, 50, 0.15));
-  border: 2px solid rgba(76, 175, 80, 0.3);
+  background: linear-gradient(135deg, rgba(13, 74, 43, 0.2), rgba(46, 125, 50, 0.15));
+  border: 2px solid rgba(102, 187, 106, 0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2.2rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -2721,7 +2712,7 @@ body::after {
 
 .skill-card-icon i {
   font-size: 2rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -3032,7 +3023,7 @@ body::after {
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #4CAF50;
 }
 
 .project-description {
@@ -3177,7 +3168,7 @@ body::after {
 .course-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #4CAF50;
   margin: 0;
   flex: 1;
 }
@@ -3391,7 +3382,7 @@ body::after {
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #4CAF50;
 }
 
 .service-description {
@@ -4503,7 +4494,7 @@ body::after {
 .timeline-title {
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: var(--text-primary);
+  color: #4CAF50;
 }
 
 .timeline-description {
@@ -5315,7 +5306,7 @@ img.loaded {
   font-size: 3.2rem;
   line-height: 1.08;
   margin: 0 0 1rem 0;
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  background: linear-gradient(135deg, #1B5E20, #66BB6A);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -7765,7 +7756,7 @@ h5 {
 .section-title {
   position: relative;
   padding-bottom: 1.5rem;
-  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
+  background: linear-gradient(135deg, #1B5E20 0%, #66BB6A 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
