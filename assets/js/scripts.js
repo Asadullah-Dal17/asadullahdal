@@ -38,7 +38,7 @@ function setupLoadingScreen() {
   window.addEventListener('load', () => setTimeout(hide, 150), { once: true });
 
   // hard fallback
-  setTimeout(hide, 4000);
+  setTimeout(hide, 2000);
 }
 
 /* ---------- Theme (Dark Mode) ---------- */
@@ -97,27 +97,68 @@ function showNotification(message, type = 'info') {
   }, 3500);
 }
 
-/* ---------- Mobile Menu ---------- */
+/* ---------- Mobile Menu (Accessible) ---------- */
 function setupMobileMenu() {
   const toggle = qs('#mobile-menu-toggle');
   const overlay = qs('#mobile-menu-overlay');
   const closeBtn = qs('#mobile-menu-close');
-  if (!toggle || !overlay) return;
+  const menu = qs('.mobile-menu');
+
+  if (!toggle || !overlay || !menu) return;
+
+  let isOpen = false;
 
   const open = () => {
+    isOpen = true;
     overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+    // Move focus into menu
+    setTimeout(() => closeBtn?.focus(), 50);
   };
+
   const close = () => {
+    isOpen = false;
     overlay.classList.remove('active');
     document.body.style.overflow = '';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.focus(); // Return focus to toggle
   };
 
   toggle.addEventListener('click', open);
   closeBtn?.addEventListener('click', close);
   qsa('.mobile-nav-link').forEach(link => link.addEventListener('click', close));
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+
+  // Keyboard accessibility
+  document.addEventListener('keydown', (e) => {
+    if (!isOpen) return;
+
+    if (e.key === 'Escape') close();
+
+    if (e.key === 'Tab') {
+      const focusables = qsa('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', menu);
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+  });
 }
 
 /* ---------- Smooth Scrolling ---------- */

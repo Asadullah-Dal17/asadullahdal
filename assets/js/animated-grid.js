@@ -10,15 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeAnimatedBackground() {
+  // Target the specific container or body fallback
+  const container = document.querySelector('.bg-animated') || document.body;
+
   // Create animated gradient overlay
   const gradientOverlay = document.createElement('div');
   gradientOverlay.className = 'animated-gradient-overlay';
-  document.body.insertBefore(gradientOverlay, document.body.firstChild);
+  container.insertBefore(gradientOverlay, container.firstChild);
 
   // Create animated grid container
   const gridContainer = document.createElement('div');
   gridContainer.className = 'animated-grid';
-  document.body.insertBefore(gridContainer, document.body.firstChild);
+  container.insertBefore(gridContainer, container.firstChild);
 
   // Generate horizontal grid lines
   generateHorizontalLines(gridContainer);
@@ -61,11 +64,12 @@ window.addEventListener('resize', () => {
   if (existingGrid) {
     existingGrid.remove();
   }
-  
+
+  const container = document.querySelector('.bg-animated') || document.body;
   const gridContainer = document.createElement('div');
   gridContainer.className = 'animated-grid';
-  document.body.insertBefore(gridContainer, document.body.firstChild);
-  
+  container.insertBefore(gridContainer, container.firstChild);
+
   generateHorizontalLines(gridContainer);
   generateVerticalLines(gridContainer);
 });

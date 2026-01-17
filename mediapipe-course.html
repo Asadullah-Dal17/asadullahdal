@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MediaPipe Course - Hands, Pose, Face Mesh | Asadullah Dal</title>
-  
+
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://asadullah-dal17.github.io/asadullahdal/mediapipe-course.html" />
-  <meta name="description" content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation. Free course launching soon by Asadullah Dal." />
-  <meta name="keywords" content="MediaPipe course, hand tracking, pose estimation, face mesh, computer vision course, MediaPipe tutorial, Asadullah Dal, free AI course, computer vision projects" />
+  <meta name="description"
+    content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation. Free course launching soon by Asadullah Dal." />
+  <meta name="keywords"
+    content="MediaPipe course, hand tracking, pose estimation, face mesh, computer vision course, MediaPipe tutorial, Asadullah Dal, free AI course, computer vision projects" />
   <meta name="author" content="Asadullah Dal" />
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://asadullah-dal17.github.io/asadullahdal/mediapipe-course.html" />
   <meta property="og:title" content="MediaPipe Course — Launching Soon | Asadullah Dal" />
-  <meta property="og:description" content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation." />
-  <meta property="og:image" content="https://asadullah-dal17.github.io/asadullahdal/assets/images/mediapipe-course-thumb.png" />
+  <meta property="og:description"
+    content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation." />
+  <meta property="og:image"
+    content="https://asadullah-dal17.github.io/asadullahdal/assets/images/mediapipe-course-thumb.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Asadullah Dal Portfolio" />
-  
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://asadullah-dal17.github.io/asadullahdal/mediapipe-course.html" />
   <meta name="twitter:title" content="MediaPipe Course — Launching Soon | Asadullah Dal" />
-  <meta name="twitter:description" content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation." />
-  <meta name="twitter:image" content="https://asadullah-dal17.github.io/asadullahdal/assets/images/mediapipe-course-thumb.png" />
+  <meta name="twitter:description"
+    content="Master Google's MediaPipe framework with 15+ hands-on projects. Learn hand tracking, pose estimation, face mesh, and segmentation." />
+  <meta name="twitter:image"
+    content="https://asadullah-dal17.github.io/asadullahdal/assets/images/mediapipe-course-thumb.png" />
   <meta name="twitter:creator" content="@aiphile17" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const saved = localStorage.getItem('darkMode');
@@ -42,7 +52,7 @@
   <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#2E7D32" />
-  
+
   <!-- Structured Data - Course -->
   <script type="application/ld+json">
   {
@@ -89,365 +99,384 @@
   }
   </script>
 </head>
+
 <body id="top">
   <!-- Enhanced Cyber Background Animation -->
   <div class="bg-animated">
-    <div class="bg-particles"></div>
+    <canvas id="bg-canvas"></canvas>
 
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-    <i id="darkModeIcon" class="fas fa-moon"></i>
-  </button>
+      <i id="darkModeIcon" class="fas fa-moon"></i>
+    </button>
 
-  <nav class="nav" role="navigation">
-    <div class="nav-container">
-      <a href="index.html" class="logo" aria-label="Home">AD</a>
-      <div class="nav-links">
-        <a class="nav-link" href="index.html#about">About</a>
-        <a class="nav-link" href="index.html#skills">Skills</a>
-        <a class="nav-link" href="index.html#projects">Projects</a>
-        <a class="nav-link" href="index.html#courses">Courses</a>
-        <a class="nav-link" href="index.html#services">Services</a>
-        <a class="nav-link" href="index.html#contact">Contact</a>
+    <nav class="nav" role="navigation">
+      <div class="nav-container">
+        <a href="index.html" class="logo" aria-label="Home">AD</a>
+        <div class="nav-links">
+          <a class="nav-link" href="index.html#about">About</a>
+          <a class="nav-link" href="index.html#skills">Skills</a>
+          <a class="nav-link" href="index.html#projects">Projects</a>
+          <a class="nav-link" href="index.html#courses">Courses</a>
+          <a class="nav-link" href="index.html#services">Services</a>
+          <a class="nav-link" href="index.html#contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+          <a class="btn btn-secondary whatsapp-link"
+            href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20know%20about%20your%20MediaPipe%20course%20launch."
+            target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
       </div>
-      <div class="nav-actions">
-        <a class="btn btn-secondary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20know%20about%20your%20MediaPipe%20course%20launch." target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-      </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Hero Section -->
-  <header class="section course-hero-section">
-    <div class="container">
-      <div class="course-hero-compact">
-        <div class="course-hero-main">
-          <div class="course-soon-badge"><i class="fas fa-rocket"></i> Launching Soon</div>
-          <h1 class="course-hero-title">MediaPipe Course</h1>
-          <p class="course-hero-description">
-            Master Google's MediaPipe framework through <strong>15+ hands-on projects</strong>. Learn Hands, Pose, Face Mesh, and Segmentation with real-world applications. Perfect for beginners and intermediate developers.
-          </p>
+    <!-- Hero Section -->
+    <header class="section course-hero-section">
+      <div class="container">
+        <div class="course-hero-compact">
+          <div class="course-hero-main">
+            <div class="course-soon-badge"><i class="fas fa-rocket"></i> Launching Soon</div>
+            <h1 class="course-hero-title">MediaPipe Course</h1>
+            <p class="course-hero-description">
+              Master Google's MediaPipe framework through <strong>15+ hands-on projects</strong>. Learn Hands, Pose,
+              Face Mesh, and Segmentation with real-world applications. Perfect for beginners and intermediate
+              developers.
+            </p>
 
-          <!-- Launch Time & Countdown -->
-          <div class="course-launch-info">
-            <div class="launch-time-display">
-              <i class="fas fa-calendar-alt"></i>
+            <!-- Launch Time & Countdown -->
+            <div class="course-launch-info">
+              <div class="launch-time-display">
+                <i class="fas fa-calendar-alt"></i>
+                <div>
+                  <strong>Launch Date</strong>
+                  <span id="launchDateDisplay">January 15, 2026 at 8:00 PM</span>
+                </div>
+              </div>
+              <div id="countdown" class="countdown" aria-label="Course launch countdown">
+                <div class="countdown-item">
+                  <div id="cd-days" class="countdown-value">--</div>
+                  <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-item">
+                  <div id="cd-hours" class="countdown-value">--</div>
+                  <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-item">
+                  <div id="cd-mins" class="countdown-value">--</div>
+                  <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-item">
+                  <div id="cd-secs" class="countdown-value">--</div>
+                  <div class="countdown-label">Seconds</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="course-quick-stats">
+              <div class="quick-stat">
+                <i class="fas fa-clock"></i>
+                <span><strong>15+</strong> Hours</span>
+              </div>
+              <div class="quick-stat">
+                <i class="fas fa-project-diagram"></i>
+                <span><strong>15+</strong> Projects</span>
+              </div>
+              <div class="quick-stat">
+                <i class="fas fa-code"></i>
+                <span><strong>6</strong> Modules</span>
+              </div>
+              <div class="quick-stat">
+                <i class="fas fa-certificate"></i>
+                <span><strong>Free</strong> Certificate</span>
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="course-hero-cta">
+              <a class="btn btn-primary" href="#todo-list"><i class="fas fa-list-check"></i> View Course Outline</a>
+              <a class="btn btn-secondary" href="https://github.com/Asadullah-Dal17/AiPhile-Mediapipe-Course"
+                target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Repo</a>
+            </div>
+
+            <!-- Notification CTA -->
+            <div class="course-notify-box">
+              <i class="fas fa-bell"></i>
               <div>
-                <strong>Launch Date</strong>
-                <span id="launchDateDisplay">January 15, 2026 at 8:00 PM</span>
-              </div>
-            </div>
-            <div id="countdown" class="countdown" aria-label="Course launch countdown">
-              <div class="countdown-item">
-                <div id="cd-days" class="countdown-value">--</div>
-                <div class="countdown-label">Days</div>
-              </div>
-              <div class="countdown-item">
-                <div id="cd-hours" class="countdown-value">--</div>
-                <div class="countdown-label">Hours</div>
-              </div>
-              <div class="countdown-item">
-                <div id="cd-mins" class="countdown-value">--</div>
-                <div class="countdown-label">Minutes</div>
-              </div>
-              <div class="countdown-item">
-                <div id="cd-secs" class="countdown-value">--</div>
-                <div class="countdown-label">Seconds</div>
+                <strong>Get notified when the course launches</strong>
+                <div class="notify-buttons">
+                  <a class="btn btn-secondary whatsapp-link"
+                    href="https://wa.me/923330366072?text=Hi%20Asadullah!%20Please%20notify%20me%20when%20your%20MediaPipe%20course%20launches."
+                    target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                  </a>
+                  <a class="btn btn-secondary"
+                    href="mailto:asadullah92c@gmail.com?subject=MediaPipe%20Course%20Launch%20Updates&body=Hi%20Asadullah,%20please%20notify%20me%20when%20the%20MediaPipe%20course%20launches.">
+                    <i class="fas fa-envelope"></i> Email
+                  </a>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Quick Stats -->
-          <div class="course-quick-stats">
-            <div class="quick-stat">
-              <i class="fas fa-clock"></i>
-              <span><strong>15+</strong> Hours</span>
-            </div>
-            <div class="quick-stat">
-              <i class="fas fa-project-diagram"></i>
-              <span><strong>15+</strong> Projects</span>
-            </div>
-            <div class="quick-stat">
-              <i class="fas fa-code"></i>
-              <span><strong>6</strong> Modules</span>
-            </div>
-            <div class="quick-stat">
-              <i class="fas fa-certificate"></i>
-              <span><strong>Free</strong> Certificate</span>
-            </div>
-          </div>
-
-          <!-- CTA Buttons -->
-          <div class="course-hero-cta">
-            <a class="btn btn-primary" href="#todo-list"><i class="fas fa-list-check"></i> View Course Outline</a>
-            <a class="btn btn-secondary" href="https://github.com/Asadullah-Dal17/AiPhile-Mediapipe-Course" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Repo</a>
-          </div>
-
-          <!-- Notification CTA -->
-          <div class="course-notify-box">
-            <i class="fas fa-bell"></i>
-            <div>
-              <strong>Get notified when the course launches</strong>
-              <div class="notify-buttons">
-                <a class="btn btn-secondary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20Please%20notify%20me%20when%20your%20MediaPipe%20course%20launches." target="_blank" rel="noopener noreferrer">
-                  <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a class="btn btn-secondary" href="mailto:asadullah92c@gmail.com?subject=MediaPipe%20Course%20Launch%20Updates&body=Hi%20Asadullah,%20please%20notify%20me%20when%20the%20MediaPipe%20course%20launches.">
-                  <i class="fas fa-envelope"></i> Email
-                </a>
+          <div class="course-hero-image">
+            <div class="course-image-wrapper">
+              <img src="assets/images/mediapipe-course-thumb.png" alt="MediaPipe Course" class="course-image">
+              <div class="course-overlay">
+                <i class="fas fa-play-circle"></i>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="course-hero-image">
-          <div class="course-image-wrapper">
-            <img src="assets/images/mediapipe-course-thumb.png" alt="MediaPipe Course" class="course-image">
-            <div class="course-overlay">
-              <i class="fas fa-play-circle"></i>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Course Description -->
-  <section class="section course-description-section">
-    <div class="container">
-      <div class="course-description-card">
-        <h2 class="section-title">About This Course</h2>
-        <div class="description-content">
-          <p class="description-text">
-            This is a <strong>project-first, practical course</strong> designed to take you from MediaPipe basics to building real-world computer vision applications. You'll learn by doing, with each module featuring hands-on projects you can add to your portfolio.
-          </p>
-          <p class="description-text">
-            Whether you're a beginner looking to get started with computer vision or an intermediate developer wanting to master MediaPipe, this course provides step-by-step guidance with <strong>video tutorials, source code, and deployment tips</strong>.
-          </p>
-          <div class="description-highlights">
-            <div class="highlight-item">
-              <i class="fas fa-check-circle"></i>
-              <span>No prior CV experience needed</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fas fa-check-circle"></i>
-              <span>All source code included</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fas fa-check-circle"></i>
-              <span>Certificate of completion</span>
-            </div>
-            <div class="highlight-item">
-              <i class="fas fa-check-circle"></i>
-              <span>Lifetime access</span>
+    <!-- Course Description -->
+    <section class="section course-description-section">
+      <div class="container">
+        <div class="course-description-card">
+          <h2 class="section-title">About This Course</h2>
+          <div class="description-content">
+            <p class="description-text">
+              This is a <strong>project-first, practical course</strong> designed to take you from MediaPipe basics to
+              building real-world computer vision applications. You'll learn by doing, with each module featuring
+              hands-on projects you can add to your portfolio.
+            </p>
+            <p class="description-text">
+              Whether you're a beginner looking to get started with computer vision or an intermediate developer wanting
+              to master MediaPipe, this course provides step-by-step guidance with <strong>video tutorials, source code,
+                and deployment tips</strong>.
+            </p>
+            <div class="description-highlights">
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>No prior CV experience needed</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>All source code included</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Certificate of completion</span>
+              </div>
+              <div class="highlight-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Lifetime access</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Simple To-Do List (What You'll Learn) -->
-  <section class="section course-todo-section" id="todo-list" style="background: rgba(255, 255, 255, 0.02);">
-    <div class="container">
-      <h2 class="section-title">What You'll Learn</h2>
-      <p class="section-lead">A simple checklist of everything covered in this course</p>
-      
-      <div class="todo-list-container">
-        <div class="todo-category">
-          <div class="todo-category-header">
-            <i class="fas fa-hand-paper"></i>
-            <h3>Hand Tracking</h3>
+    <!-- Simple To-Do List (What You'll Learn) -->
+    <section class="section course-todo-section" id="todo-list" style="background: rgba(255, 255, 255, 0.02);">
+      <div class="container">
+        <h2 class="section-title">What You'll Learn</h2>
+        <p class="section-lead">A simple checklist of everything covered in this course</p>
+
+        <div class="todo-list-container">
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <i class="fas fa-hand-paper"></i>
+              <h3>Hand Tracking</h3>
+            </div>
+            <ul class="todo-list">
+              <li class="todo-item"><i class="fas fa-check"></i> Detect 21 hand landmarks</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Count fingers and recognize gestures</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Build hand controllers for apps</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Create interactive hand-based games</li>
+            </ul>
           </div>
-          <ul class="todo-list">
-            <li class="todo-item"><i class="fas fa-check"></i> Detect 21 hand landmarks</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Count fingers and recognize gestures</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Build hand controllers for apps</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Create interactive hand-based games</li>
-          </ul>
-        </div>
 
-        <div class="todo-category">
-          <div class="todo-category-header">
-            <i class="fas fa-person-running"></i>
-            <h3>Pose Estimation</h3>
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <i class="fas fa-person-running"></i>
+              <h3>Pose Estimation</h3>
+            </div>
+            <ul class="todo-list">
+              <li class="todo-item"><i class="fas fa-check"></i> Track 33 body pose landmarks</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Calculate body angles and posture</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Build fitness tracking applications</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Create workout form analysis tools</li>
+            </ul>
           </div>
-          <ul class="todo-list">
-            <li class="todo-item"><i class="fas fa-check"></i> Track 33 body pose landmarks</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Calculate body angles and posture</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Build fitness tracking applications</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Create workout form analysis tools</li>
-          </ul>
-        </div>
 
-        <div class="todo-category">
-          <div class="todo-category-header">
-            <i class="fas fa-face-smile"></i>
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <i class="fas fa-face-smile"></i>
+              <h3>Face Mesh & Iris</h3>
+            </div>
+            <ul class="todo-list">
+              <li class="todo-item"><i class="fas fa-check"></i> Detect 468 face mesh landmarks</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Track iris movement and gaze direction</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Build eye-tracking applications</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Create blink detection systems</li>
+            </ul>
+          </div>
+
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <i class="fas fa-layer-group"></i>
+              <h3>Segmentation & AR</h3>
+            </div>
+            <ul class="todo-list">
+              <li class="todo-item"><i class="fas fa-check"></i> Implement selfie segmentation</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Remove and replace backgrounds</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Create virtual backgrounds</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Build AR overlay applications</li>
+            </ul>
+          </div>
+
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <i class="fas fa-cog"></i>
+              <h3>Setup & Optimization</h3>
+            </div>
+            <ul class="todo-list">
+              <li class="todo-item"><i class="fas fa-check"></i> Install and configure MediaPipe</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Optimize FPS and performance</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Learn threading basics</li>
+              <li class="todo-item"><i class="fas fa-check"></i> Deploy applications</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course Modules (Condensed Syllabus) -->
+    <section class="section course-modules-section">
+      <div class="container">
+        <h2 class="section-title">Course Modules</h2>
+        <p class="section-lead">6 comprehensive modules with tutorials and projects</p>
+
+        <div class="modules-grid">
+          <div class="module-card">
+            <div class="module-number">01</div>
+            <h3>Setup & Fundamentals</h3>
+            <p>Install MediaPipe, understand coordinates, run your first landmarks</p>
+          </div>
+          <div class="module-card">
+            <div class="module-number">02</div>
+            <h3>Hands</h3>
+            <p>Hand landmarks, gestures, finger counting, hand controllers</p>
+          </div>
+          <div class="module-card">
+            <div class="module-number">03</div>
+            <h3>Pose</h3>
+            <p>Pose landmarks, angle calculation, fitness tracking projects</p>
+          </div>
+          <div class="module-card">
+            <div class="module-number">04</div>
             <h3>Face Mesh & Iris</h3>
+            <p>Face mesh, iris tracking, gaze direction, blink detection</p>
           </div>
-          <ul class="todo-list">
-            <li class="todo-item"><i class="fas fa-check"></i> Detect 468 face mesh landmarks</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Track iris movement and gaze direction</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Build eye-tracking applications</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Create blink detection systems</li>
-          </ul>
-        </div>
-
-        <div class="todo-category">
-          <div class="todo-category-header">
-            <i class="fas fa-layer-group"></i>
+          <div class="module-card">
+            <div class="module-number">05</div>
             <h3>Segmentation & AR</h3>
+            <p>Selfie segmentation, background removal, AR overlays</p>
           </div>
-          <ul class="todo-list">
-            <li class="todo-item"><i class="fas fa-check"></i> Implement selfie segmentation</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Remove and replace backgrounds</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Create virtual backgrounds</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Build AR overlay applications</li>
-          </ul>
-        </div>
-
-        <div class="todo-category">
-          <div class="todo-category-header">
-            <i class="fas fa-cog"></i>
-            <h3>Setup & Optimization</h3>
+          <div class="module-card">
+            <div class="module-number">06</div>
+            <h3>Optimization & Deployment</h3>
+            <p>FPS optimization, threading, deployment tips and best practices</p>
           </div>
-          <ul class="todo-list">
-            <li class="todo-item"><i class="fas fa-check"></i> Install and configure MediaPipe</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Optimize FPS and performance</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Learn threading basics</li>
-            <li class="todo-item"><i class="fas fa-check"></i> Deploy applications</li>
-          </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Course Modules (Condensed Syllabus) -->
-  <section class="section course-modules-section">
-    <div class="container">
-      <h2 class="section-title">Course Modules</h2>
-      <p class="section-lead">6 comprehensive modules with tutorials and projects</p>
-
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-number">01</div>
-          <h3>Setup & Fundamentals</h3>
-          <p>Install MediaPipe, understand coordinates, run your first landmarks</p>
-        </div>
-        <div class="module-card">
-          <div class="module-number">02</div>
-          <h3>Hands</h3>
-          <p>Hand landmarks, gestures, finger counting, hand controllers</p>
-        </div>
-        <div class="module-card">
-          <div class="module-number">03</div>
-          <h3>Pose</h3>
-          <p>Pose landmarks, angle calculation, fitness tracking projects</p>
-        </div>
-        <div class="module-card">
-          <div class="module-number">04</div>
-          <h3>Face Mesh & Iris</h3>
-          <p>Face mesh, iris tracking, gaze direction, blink detection</p>
-        </div>
-        <div class="module-card">
-          <div class="module-number">05</div>
-          <h3>Segmentation & AR</h3>
-          <p>Selfie segmentation, background removal, AR overlays</p>
-        </div>
-        <div class="module-card">
-          <div class="module-number">06</div>
-          <h3>Optimization & Deployment</h3>
-          <p>FPS optimization, threading, deployment tips and best practices</p>
+    <!-- Final CTA Section -->
+    <section class="section course-cta-section" style="background: rgba(255, 255, 255, 0.02);">
+      <div class="container">
+        <div class="course-cta-card">
+          <h2>Ready to Master MediaPipe?</h2>
+          <p>Join the waitlist and be the first to access this comprehensive course when it launches.</p>
+          <div class="cta-buttons">
+            <a class="btn btn-primary whatsapp-link"
+              href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20enroll%20in%20the%20MediaPipe%20course%20when%20it%20launches."
+              target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-whatsapp"></i> Reserve Your Spot
+            </a>
+            <a class="btn btn-secondary" href="index.html#contact">
+              <i class="fas fa-envelope"></i> Contact Me
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Final CTA Section -->
-  <section class="section course-cta-section" style="background: rgba(255, 255, 255, 0.02);">
-    <div class="container">
-      <div class="course-cta-card">
-        <h2>Ready to Master MediaPipe?</h2>
-        <p>Join the waitlist and be the first to access this comprehensive course when it launches.</p>
-        <div class="cta-buttons">
-          <a class="btn btn-primary whatsapp-link" href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20enroll%20in%20the%20MediaPipe%20course%20when%20it%20launches." target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> Reserve Your Spot
-          </a>
-          <a class="btn btn-secondary" href="index.html#contact">
-            <i class="fas fa-envelope"></i> Contact Me
-          </a>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>© 2024 Asadullah Dal. All rights reserved.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-bottom"><p>© 2024 Asadullah Dal. All rights reserved.</p></div>
-    </div>
-  </footer>
+    <script>
+      // ===== MediaPipe Course Countdown =====
+      const COURSE_LAUNCH_ISO = '2026-01-15T20:00:00+05:00';
 
-  <script>
-    // ===== MediaPipe Course Countdown =====
-    const COURSE_LAUNCH_ISO = '2026-01-15T20:00:00+05:00';
+      function pad2(n) { return String(n).padStart(2, '0'); }
 
-    function pad2(n){ return String(n).padStart(2,'0'); }
-
-    function formatLaunchDate(isoString) {
-      const date = new Date(isoString);
-      if (isNaN(date.getTime())) return 'TBA';
-      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' };
-      return date.toLocaleDateString('en-US', options);
-    }
-
-    function updateCountdown(){
-      const target = new Date(COURSE_LAUNCH_ISO).getTime();
-      const now = Date.now();
-      const diff = target - now;
-
-      const daysEl = document.getElementById('cd-days');
-      const hoursEl = document.getElementById('cd-hours');
-      const minsEl = document.getElementById('cd-mins');
-      const secsEl = document.getElementById('cd-secs');
-      const dateDisplay = document.getElementById('launchDateDisplay');
-      
-      if(dateDisplay) {
-        dateDisplay.textContent = formatLaunchDate(COURSE_LAUNCH_ISO);
+      function formatLaunchDate(isoString) {
+        const date = new Date(isoString);
+        if (isNaN(date.getTime())) return 'TBA';
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' };
+        return date.toLocaleDateString('en-US', options);
       }
 
-      if(!daysEl || !hoursEl || !minsEl || !secsEl) return;
+      function updateCountdown() {
+        const target = new Date(COURSE_LAUNCH_ISO).getTime();
+        const now = Date.now();
+        const diff = target - now;
 
-      if (isNaN(target)) {
-        daysEl.textContent = '--'; hoursEl.textContent='--'; minsEl.textContent='--'; secsEl.textContent='--';
-        return;
+        const daysEl = document.getElementById('cd-days');
+        const hoursEl = document.getElementById('cd-hours');
+        const minsEl = document.getElementById('cd-mins');
+        const secsEl = document.getElementById('cd-secs');
+        const dateDisplay = document.getElementById('launchDateDisplay');
+
+        if (dateDisplay) {
+          dateDisplay.textContent = formatLaunchDate(COURSE_LAUNCH_ISO);
+        }
+
+        if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+        if (isNaN(target)) {
+          daysEl.textContent = '--'; hoursEl.textContent = '--'; minsEl.textContent = '--'; secsEl.textContent = '--';
+          return;
+        }
+
+        if (diff <= 0) {
+          daysEl.textContent = '00'; hoursEl.textContent = '00'; minsEl.textContent = '00'; secsEl.textContent = '00';
+          if (dateDisplay) dateDisplay.textContent = 'Course is Live!';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        daysEl.textContent = String(days);
+        hoursEl.textContent = pad2(hours);
+        minsEl.textContent = pad2(mins);
+        secsEl.textContent = pad2(secs);
       }
 
-      if (diff <= 0) {
-        daysEl.textContent = '00'; hoursEl.textContent='00'; minsEl.textContent='00'; secsEl.textContent='00';
-        if(dateDisplay) dateDisplay.textContent = 'Course is Live!';
-        return;
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => { updateCountdown(); setInterval(updateCountdown, 1000); });
+      } else {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
       }
+    </script>
 
-      const days = Math.floor(diff / (1000*60*60*24));
-      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-      const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-      const secs = Math.floor((diff % (1000*60)) / 1000);
-
-      daysEl.textContent = String(days);
-      hoursEl.textContent = pad2(hours);
-      minsEl.textContent = pad2(mins);
-      secsEl.textContent = pad2(secs);
-    }
-
-    if(document.readyState === 'loading'){
-      document.addEventListener('DOMContentLoaded', () => { updateCountdown(); setInterval(updateCountdown, 1000); });
-    } else {
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    }
-  </script>
-
-  <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/canvas-bg.js"></script>
   </div> <!-- End .bg-animated -->
 </body>
+
 </html>

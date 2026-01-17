@@ -42,157 +42,159 @@
 <body>
     <!-- Enhanced Cyber Background Animation -->
     <div class="bg-animated">
-        <div class="bg-particles"></div>
+        <canvas id="bg-canvas"></canvas>
 
         <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-container">
-            <div class="loading-logo">
-                <div class="logo-text">AD</div>
+        <div class="loading-screen" id="loading-screen">
+            <div class="loading-container">
+                <div class="loading-logo">
+                    <div class="logo-text">AD</div>
+                </div>
+                <div class="loading-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="loading-text">Fetching Articles...</div>
             </div>
-            <div class="loading-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="nav">
+            <div class="nav-container">
+                <a aria-label="Home" class="logo" href="index.html">AD</a>
+                <div class="nav-links">
+                    <a class="nav-link" href="index.html#about">About</a>
+                    <a class="nav-link" href="index.html#skills">Skills</a>
+                    <a class="nav-link" href="index.html#projects">Projects</a>
+                    <a class="nav-link" href="index.html#courses">Courses</a>
+                    <a class="nav-link" href="videos.html">YouTube</a>
+                    <a class="nav-link active" href="blog.html">Blog</a>
+                    <a class="nav-link" href="index.html#contact">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
+                        style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
+                    <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
-            <div class="loading-text">Fetching Articles...</div>
-        </div>
-    </div>
+        </nav>
 
-    <!-- Navbar -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a aria-label="Home" class="logo" href="index.html">AD</a>
-            <div class="nav-links">
-                <a class="nav-link" href="index.html#about">About</a>
-                <a class="nav-link" href="index.html#skills">Skills</a>
-                <a class="nav-link" href="index.html#projects">Projects</a>
-                <a class="nav-link" href="index.html#courses">Courses</a>
-                <a class="nav-link" href="videos.html">YouTube</a>
-                <a class="nav-link active" href="blog.html">Blog</a>
-                <a class="nav-link" href="index.html#contact">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
-                    style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
-                    <i class="fas fa-moon" id="darkModeIcon"></i>
-                </button>
-                <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <div class="mobile-logo">AD</div>
+                    <button class="mobile-menu-close" id="mobile-menu-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <nav class="mobile-nav">
+                    <a class="mobile-nav-link" href="index.html#about">About</a>
+                    <a class="mobile-nav-link" href="index.html#skills">Skills</a>
+                    <a class="mobile-nav-link" href="index.html#projects">Projects</a>
+                    <a class="mobile-nav-link" href="index.html#courses">Courses</a>
+                    <a class="mobile-nav-link" href="videos.html">YouTube</a>
+                    <a class="mobile-nav-link active" href="blog.html">Blog</a>
+                    <a class="mobile-nav-link" href="index.html#contact">Contact</a>
+                </nav>
             </div>
         </div>
-    </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-        <div class="mobile-menu">
-            <div class="mobile-menu-header">
-                <div class="mobile-logo">AD</div>
-                <button class="mobile-menu-close" id="mobile-menu-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav class="mobile-nav">
-                <a class="mobile-nav-link" href="index.html#about">About</a>
-                <a class="mobile-nav-link" href="index.html#skills">Skills</a>
-                <a class="mobile-nav-link" href="index.html#projects">Projects</a>
-                <a class="mobile-nav-link" href="index.html#courses">Courses</a>
-                <a class="mobile-nav-link" href="videos.html">YouTube</a>
-                <a class="mobile-nav-link active" href="blog.html">Blog</a>
-                <a class="mobile-nav-link" href="index.html#contact">Contact</a>
-            </nav>
-        </div>
-    </div>
+        <!-- Main Content -->
+        <main>
+            <section class="blog-hero">
+                <div class="container">
+                    <h1>From the Blog</h1>
+                    <p>Thoughts, tutorials, and deep dives into Computer Vision and AI.</p>
+                </div>
+            </section>
 
-    <!-- Main Content -->
-    <main>
-        <section class="blog-hero">
+            <section class="container">
+                <!-- Toolbar -->
+                <div class="blog-toolbar">
+                    <div class="filter-group">
+                        <button class="filter-chip active" data-filter="all">All</button>
+                        <button class="filter-chip" data-filter="tutorial">Tutorials</button>
+                        <button class="filter-chip" data-filter="computer-vision">Computer Vision</button>
+                        <button class="filter-chip" data-filter="python">Python</button>
+                    </div>
+
+                    <div class="search-group">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search articles...">
+                    </div>
+                </div>
+
+                <!-- Grid -->
+                <div class="blog-grid" id="blog-grid">
+                    <!-- JS renders here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
             <div class="container">
-                <h1>From the Blog</h1>
-                <p>Thoughts, tutorials, and deep dives into Computer Vision and AI.</p>
-            </div>
-        </section>
-
-        <section class="container">
-            <!-- Toolbar -->
-            <div class="blog-toolbar">
-                <div class="filter-group">
-                    <button class="filter-chip active" data-filter="all">All</button>
-                    <button class="filter-chip" data-filter="tutorial">Tutorials</button>
-                    <button class="filter-chip" data-filter="computer-vision">Computer Vision</button>
-                    <button class="filter-chip" data-filter="python">Python</button>
-                </div>
-
-                <div class="search-group">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="search-input" placeholder="Search articles...">
-                </div>
-            </div>
-
-            <!-- Grid -->
-            <div class="blog-grid" id="blog-grid">
-                <!-- JS renders here -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>Asadullah Dal</h3>
-                    <p>Computer Vision Developer & AI Educator</p>
-                    <p>Creating innovative AI solutions and educating the next generation of developers through
-                        practical
-                        computer
-                        vision applications.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <div class="footer-link-grid">
-                        <a href="index.html#about">About</a>
-                        <a href="index.html#skills">Skills</a>
-                        <a href="index.html#projects">Projects</a>
-                        <a href="index.html#courses">Courses</a>
-                        <a href="videos.html">YouTube</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="index.html#services">Services</a>
-                        <a href="index.html#contact">Contact</a>
+                <div class="footer-content">
+                    <div class="footer-about">
+                        <h3>Asadullah Dal</h3>
+                        <p>Computer Vision Developer & AI Educator</p>
+                        <p>Creating innovative AI solutions and educating the next generation of developers through
+                            practical
+                            computer
+                            vision applications.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <div class="footer-link-grid">
+                            <a href="index.html#about">About</a>
+                            <a href="index.html#skills">Skills</a>
+                            <a href="index.html#projects">Projects</a>
+                            <a href="index.html#courses">Courses</a>
+                            <a href="videos.html">YouTube</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="index.html#services">Services</a>
+                            <a href="index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Connect With Me</h4>
+                        <div class="social-links">
+                            <a aria-label="GitHub" class="social-link" href="https://github.com/Asadullah-Dal17"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a aria-label="LinkedIn" class="social-link"
+                                href="https://www.linkedin.com/in/asadullah-dal/" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a aria-label="YouTube" class="social-link" href="https://youtube.com/@asadullah-dal"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/aiphile17"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-social">
-                    <h4>Connect With Me</h4>
-                    <div class="social-links">
-                        <a aria-label="GitHub" class="social-link" href="https://github.com/Asadullah-Dal17"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a aria-label="LinkedIn" class="social-link" href="https://www.linkedin.com/in/asadullah-dal/"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a aria-label="YouTube" class="social-link" href="https://youtube.com/@asadullah-dal"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/aiphile17"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
+                <div class="footer-bottom">
+                    <p>© 2024 Asadullah Dal. All rights reserved.</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2024 Asadullah Dal. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/scripts.js"></script>
-    <script src="assets/js/blog.js"></script>
+        <!-- Scripts -->
+        <script src="assets/js/canvas-bg.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        <script src="assets/js/blog.js"></script>
     </div> <!-- End .bg-animated -->
 </body>
 

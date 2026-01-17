@@ -444,244 +444,245 @@
 <body>
     <!-- Enhanced Cyber Background Animation -->
     <div class="bg-animated">
-        <div class="bg-particles"></div>
+        <canvas id="bg-canvas"></canvas>
 
         <!-- Loading Screen -->
-    <div class="loading-screen" id="loading-screen">
-        <div class="loading-container">
-            <div class="loading-logo">
-                <div class="logo-text">AD</div>
+        <div class="loading-screen" id="loading-screen">
+            <div class="loading-container">
+                <div class="loading-logo">
+                    <div class="logo-text">AD</div>
+                </div>
+                <div class="loading-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="loading-text">Loading Gallery...</div>
             </div>
-            <div class="loading-progress">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="nav">
+            <div class="nav-container">
+                <a aria-label="Home" class="logo" href="index.html">AD</a>
+                <div class="nav-links">
+                    <a class="nav-link" href="index.html#about">About</a>
+                    <a class="nav-link" href="index.html#skills">Skills</a>
+                    <a class="nav-link" href="index.html#projects">Projects</a>
+                    <a class="nav-link" href="index.html#courses">Courses</a>
+                    <a class="nav-link active" href="videos.html">YouTube</a>
+                    <a class="nav-link" href="blog.html">Blog</a>
+                    <a class="nav-link" href="index.html#contact">Contact</a>
+                </div>
+                <div class="nav-actions">
+                    <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
+                        style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
+                    <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
-            <div class="loading-text">Loading Gallery...</div>
-        </div>
-    </div>
+        </nav>
 
-    <!-- Navbar -->
-    <nav class="nav">
-        <div class="nav-container">
-            <a aria-label="Home" class="logo" href="index.html">AD</a>
-            <div class="nav-links">
-                <a class="nav-link" href="index.html#about">About</a>
-                <a class="nav-link" href="index.html#skills">Skills</a>
-                <a class="nav-link" href="index.html#projects">Projects</a>
-                <a class="nav-link" href="index.html#courses">Courses</a>
-                <a class="nav-link active" href="videos.html">YouTube</a>
-                <a class="nav-link" href="blog.html">Blog</a>
-                <a class="nav-link" href="index.html#contact">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
-                    style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
-                    <i class="fas fa-moon" id="darkModeIcon"></i>
-                </button>
-                <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <div class="mobile-logo">AD</div>
+                    <button class="mobile-menu-close" id="mobile-menu-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <nav class="mobile-nav">
+                    <a class="mobile-nav-link" href="index.html#about">About</a>
+                    <a class="mobile-nav-link" href="index.html#skills">Skills</a>
+                    <a class="mobile-nav-link" href="index.html#projects">Projects</a>
+                    <a class="mobile-nav-link" href="index.html#courses">Courses</a>
+                    <a class="mobile-nav-link active" href="videos.html">YouTube</a>
+                    <a class="mobile-nav-link" href="blog.html">Blog</a>
+                    <a class="mobile-nav-link" href="index.html#contact">Contact</a>
+                </nav>
             </div>
         </div>
-    </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-        <div class="mobile-menu">
-            <div class="mobile-menu-header">
-                <div class="mobile-logo">AD</div>
-                <button class="mobile-menu-close" id="mobile-menu-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav class="mobile-nav">
-                <a class="mobile-nav-link" href="index.html#about">About</a>
-                <a class="mobile-nav-link" href="index.html#skills">Skills</a>
-                <a class="mobile-nav-link" href="index.html#projects">Projects</a>
-                <a class="mobile-nav-link" href="index.html#courses">Courses</a>
-                <a class="mobile-nav-link active" href="videos.html">YouTube</a>
-                <a class="mobile-nav-link" href="blog.html">Blog</a>
-                <a class="mobile-nav-link" href="index.html#contact">Contact</a>
-            </nav>
-        </div>
-    </div>
+        <!-- Main Content -->
+        <main>
+            <section class="video-page-header">
+                <div class="container">
+                    <h1>Video Gallery</h1>
+                    <p>Explore my latest tutorials, reviews, and insights on Computer Vision.</p>
+                </div>
+            </section>
 
-    <!-- Main Content -->
-    <main>
-        <section class="video-page-header">
-            <div class="container">
-                <h1>Video Gallery</h1>
-                <p>Explore my latest tutorials, reviews, and insights on Computer Vision.</p>
-            </div>
-        </section>
+            <!-- Player Section -->
+            <section class="player-section" id="player-anchor">
+                <div class="container">
+                    <div class="player-wrapper">
+                        <!-- Video Area -->
+                        <div class="video-embed-container" id="embed-container">
+                            <!-- Facade loaded by JS -->
+                        </div>
 
-        <!-- Player Section -->
-        <section class="player-section" id="player-anchor">
-            <div class="container">
-                <div class="player-wrapper">
-                    <!-- Video Area -->
-                    <div class="video-embed-container" id="embed-container">
-                        <!-- Facade loaded by JS -->
-                    </div>
+                        <!-- Info Area -->
+                        <div class="current-video-details">
+                            <div class="meta-row">
+                                <div class="video-info-main">
+                                    <div class="current-tags">
+                                        <span id="current-date"><i class="far fa-clock"></i> ...</span>
+                                        <span style="color: var(--text-muted);">|</span>
+                                        <span>LATEST UPLOAD</span>
+                                    </div>
+                                    <h2 class="current-title" id="current-title">Select a video to play</h2>
 
-                    <!-- Info Area -->
-                    <div class="current-video-details">
-                        <div class="meta-row">
-                            <div class="video-info-main">
-                                <div class="current-tags">
-                                    <span id="current-date"><i class="far fa-clock"></i> ...</span>
-                                    <span style="color: var(--text-muted);">|</span>
-                                    <span>LATEST UPLOAD</span>
+                                    <div class="action-row">
+                                        <a href="#" target="_blank" class="btn btn-primary" id="btn-watch-yt">
+                                            <i class="fab fa-youtube"></i> Watch on YouTube
+                                        </a>
+                                        <a href="https://youtube.com/@asadullah-dal/videos" target="_blank"
+                                            class="btn btn-secondary">
+                                            Browse Channel
+                                        </a>
+                                    </div>
                                 </div>
-                                <h2 class="current-title" id="current-title">Select a video to play</h2>
 
-                                <div class="action-row">
-                                    <a href="#" target="_blank" class="btn btn-primary" id="btn-watch-yt">
-                                        <i class="fab fa-youtube"></i> Watch on YouTube
-                                    </a>
-                                    <a href="https://youtube.com/@asadullah-dal/videos" target="_blank"
-                                        class="btn btn-secondary">
-                                        Browse Channel
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Stats -->
-                            <div class="stat-box-container">
-                                <div class="stat-box">
-                                    <span class="stat-number" id="stat-subs">...</span>
-                                    <span class="stat-label">Subscribers</span>
-                                </div>
-                                <div class="stat-box">
-                                    <span class="stat-number" id="stat-videos">...</span>
-                                    <span class="stat-label">Videos</span>
+                                <!-- Stats -->
+                                <div class="stat-box-container">
+                                    <div class="stat-box">
+                                        <span class="stat-number" id="stat-subs">...</span>
+                                        <span class="stat-label">Subscribers</span>
+                                    </div>
+                                    <div class="stat-box">
+                                        <span class="stat-number" id="stat-videos">...</span>
+                                        <span class="stat-label">Videos</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Grid Section -->
-        <section class="container">
-            <div class="grid-header">
-                <h3>Recent Uploads</h3>
-                <div style="font-size: 0.9rem; color: var(--text-muted);">
-                    Updated Daily
-                </div>
-            </div>
-
-            <div class="video-grid" id="video-grid" role="list">
-                <!-- Videos injected here -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>Asadullah Dal</h3>
-                    <p>Computer Vision Developer & AI Educator</p>
-                    <p>Creating innovative AI solutions and educating the next generation of developers through
-                        practical
-                        computer
-                        vision applications.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <div class="footer-link-grid">
-                        <a href="index.html#about">About</a>
-                        <a href="index.html#skills">Skills</a>
-                        <a href="index.html#projects">Projects</a>
-                        <a href="index.html#courses">Courses</a>
-                        <a href="videos.html">YouTube</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="index.html#services">Services</a>
-                        <a href="index.html#contact">Contact</a>
+            <!-- Grid Section -->
+            <section class="container">
+                <div class="grid-header">
+                    <h3>Recent Uploads</h3>
+                    <div style="font-size: 0.9rem; color: var(--text-muted);">
+                        Updated Daily
                     </div>
                 </div>
-                <div class="footer-social">
-                    <h4>Connect With Me</h4>
-                    <div class="social-links">
-                        <a aria-label="GitHub" class="social-link" href="https://github.com/Asadullah-Dal17"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a aria-label="LinkedIn" class="social-link" href="https://www.linkedin.com/in/asadullah-dal/"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a aria-label="YouTube" class="social-link" href="https://youtube.com/@asadullah-dal"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                        <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/aiphile17"
-                            target="_blank" rel="noopener noreferrer">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+
+                <div class="video-grid" id="video-grid" role="list">
+                    <!-- Videos injected here -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-about">
+                        <h3>Asadullah Dal</h3>
+                        <p>Computer Vision Developer & AI Educator</p>
+                        <p>Creating innovative AI solutions and educating the next generation of developers through
+                            practical
+                            computer
+                            vision applications.</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <div class="footer-link-grid">
+                            <a href="index.html#about">About</a>
+                            <a href="index.html#skills">Skills</a>
+                            <a href="index.html#projects">Projects</a>
+                            <a href="index.html#courses">Courses</a>
+                            <a href="videos.html">YouTube</a>
+                            <a href="blog.html">Blog</a>
+                            <a href="index.html#services">Services</a>
+                            <a href="index.html#contact">Contact</a>
+                        </div>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Connect With Me</h4>
+                        <div class="social-links">
+                            <a aria-label="GitHub" class="social-link" href="https://github.com/Asadullah-Dal17"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a aria-label="LinkedIn" class="social-link"
+                                href="https://www.linkedin.com/in/asadullah-dal/" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a aria-label="YouTube" class="social-link" href="https://youtube.com/@asadullah-dal"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/aiphile17"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <div class="footer-bottom">
+                    <p>© 2024 Asadullah Dal. All rights reserved.</p>
+                </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2024 Asadullah Dal. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Scripts -->
-    <script src="assets/js/scripts.js"></script>
-    <script>
-        let allVideos = [];
-        let currentVideoId = null;
+        <!-- Scripts -->
+        <script src="assets/js/scripts.js"></script>
+        <script>
+            let allVideos = [];
+            let currentVideoId = null;
 
-        async function loadChannelContent() {
-            try {
-                const response = await fetch('data/recent-videos.json');
-                if (!response.ok) throw new Error('Failed to load video data');
+            async function loadChannelContent() {
+                try {
+                    const response = await fetch('data/recent-videos.json');
+                    if (!response.ok) throw new Error('Failed to load video data');
 
-                const data = await response.json();
+                    const data = await response.json();
 
-                // Parse Data
-                let stats = { subscribers: '4K+', videos: '50+' };
-                if (Array.isArray(data)) {
-                    allVideos = data;
-                } else {
-                    allVideos = data.videos || [];
-                    if (data.stats) stats = data.stats;
+                    // Parse Data
+                    let stats = { subscribers: '4K+', videos: '50+' };
+                    if (Array.isArray(data)) {
+                        allVideos = data;
+                    } else {
+                        allVideos = data.videos || [];
+                        if (data.stats) stats = data.stats;
+                    }
+
+                    // Update Stats
+                    document.getElementById('stat-subs').textContent = stats.subscribers || 'N/A';
+                    document.getElementById('stat-videos').textContent = stats.videos || 'N/A';
+
+                    // Limit to 6
+                    allVideos = allVideos.slice(0, 6);
+
+                    // Load First Video
+                    if (allVideos.length > 0) {
+                        loadVideo(allVideos[0], 0, true);
+                    } else {
+                        document.getElementById('current-title').textContent = "No videos found.";
+                    }
+
+                } catch (error) {
+                    console.error('Error loading content:', error);
+                    document.getElementById('current-title').textContent = "Could not load content.";
                 }
-
-                // Update Stats
-                document.getElementById('stat-subs').textContent = stats.subscribers || 'N/A';
-                document.getElementById('stat-videos').textContent = stats.videos || 'N/A';
-
-                // Limit to 6
-                allVideos = allVideos.slice(0, 6);
-
-                // Load First Video
-                if (allVideos.length > 0) {
-                    loadVideo(allVideos[0], 0, true);
-                } else {
-                    document.getElementById('current-title').textContent = "No videos found.";
-                }
-
-            } catch (error) {
-                console.error('Error loading content:', error);
-                document.getElementById('current-title').textContent = "Could not load content.";
             }
-        }
 
-        function loadVideo(video, index, isInitial = false) {
-            currentVideoId = video.videoId;
+            function loadVideo(video, index, isInitial = false) {
+                currentVideoId = video.videoId;
 
-            // 1. Setup Facade (High Performance Load)
-            const container = document.getElementById('embed-container');
+                // 1. Setup Facade (High Performance Load)
+                const container = document.getElementById('embed-container');
 
-            // If it's a new video selection, reset to facade
-            container.innerHTML = `
+                // If it's a new video selection, reset to facade
+                container.innerHTML = `
                 <div class="video-facade" style="background-image: url('${video.thumbnail.replace("default", "maxresdefault")}');" onclick="playCurrentVideo('${video.videoId}')" role="button" aria-label="Play Video" tabindex="0" onkeypress="if(event.key === 'Enter') playCurrentVideo('${video.videoId}')">
                     <div class="facade-play-btn">
                         <i class="fas fa-play" style="margin-left: 6px;"></i>
@@ -689,64 +690,64 @@
                 </div>
             `;
 
-            // 2. Update Info
-            document.getElementById('current-title').textContent = video.title;
-            const date = new Date(video.published);
-            document.getElementById('current-date').innerHTML = `<i class="far fa-clock"></i> ${date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
-            document.getElementById('btn-watch-yt').href = `https://www.youtube.com/watch?v=${video.videoId}`;
+                // 2. Update Info
+                document.getElementById('current-title').textContent = video.title;
+                const date = new Date(video.published);
+                document.getElementById('current-date').innerHTML = `<i class="far fa-clock"></i> ${date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
+                document.getElementById('btn-watch-yt').href = `https://www.youtube.com/watch?v=${video.videoId}`;
 
-            // 3. Render Grid
-            renderGrid(index);
+                // 3. Render Grid
+                renderGrid(index);
 
-            // 4. Scroll (unless initial)
-            if (!isInitial) {
-                const playerWrapper = document.querySelector('.player-wrapper');
-                const offset = 100;
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = playerWrapper.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
+                // 4. Scroll (unless initial)
+                if (!isInitial) {
+                    const playerWrapper = document.querySelector('.player-wrapper');
+                    const offset = 100;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = playerWrapper.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
             }
-        }
 
-        function playCurrentVideo(videoId) {
-            const container = document.getElementById('embed-container');
-            container.innerHTML = `
+            function playCurrentVideo(videoId) {
+                const container = document.getElementById('embed-container');
+                container.innerHTML = `
                 <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" 
                     title="YouTube video player" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
             `;
-        }
+            }
 
-        function renderGrid(activeIndex) {
-            const grid = document.getElementById('video-grid');
-            grid.innerHTML = '';
+            function renderGrid(activeIndex) {
+                const grid = document.getElementById('video-grid');
+                grid.innerHTML = '';
 
-            allVideos.forEach((video, index) => {
-                const isActive = index === activeIndex;
-                const date = new Date(video.published);
-                const formattedDate = date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+                allVideos.forEach((video, index) => {
+                    const isActive = index === activeIndex;
+                    const date = new Date(video.published);
+                    const formattedDate = date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 
-                const card = document.createElement('article');
-                card.className = `video-card ${isActive ? 'active-playing' : ''}`;
-                card.tabIndex = 0;
-                card.role = 'button';
-                card.ariaLabel = `Play ${video.title}`;
-                card.onclick = () => loadVideo(video, index);
+                    const card = document.createElement('article');
+                    card.className = `video-card ${isActive ? 'active-playing' : ''}`;
+                    card.tabIndex = 0;
+                    card.role = 'button';
+                    card.ariaLabel = `Play ${video.title}`;
+                    card.onclick = () => loadVideo(video, index);
 
-                // Keyboard accessibility
-                card.onkeypress = (e) => {
-                    if (e.key === 'Enter') loadVideo(video, index);
-                };
+                    // Keyboard accessibility
+                    card.onkeypress = (e) => {
+                        if (e.key === 'Enter') loadVideo(video, index);
+                    };
 
-                card.innerHTML = `
+                    card.innerHTML = `
                     <div class="card-thumb-container">
                         <img src="${video.thumbnail}" alt="" class="card-thumb" loading="lazy">
                         <div class="now-playing-badge"><i class="fas fa-chart-bar"></i> PLAYING</div>
@@ -766,12 +767,13 @@
                     </div>
                 `;
 
-                grid.appendChild(card);
-            });
-        }
+                    grid.appendChild(card);
+                });
+            }
 
-        document.addEventListener('DOMContentLoaded', loadChannelContent);
-    </script>
+            document.addEventListener('DOMContentLoaded', loadChannelContent);
+        </script>
+        <script src="assets/js/canvas-bg.js"></script>
     </div> <!-- End .bg-animated -->
 </body>
 
