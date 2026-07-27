@@ -83,7 +83,7 @@
         "@type": "Person",
         "name": "Asadullah Dal"
       },
-      "startDate": "2026-01-15T20:00:00+05:00"
+      "startDate": "2026-08-15T20:00:00+05:00"
     },
     "teaches": [
       "Hand Tracking",
@@ -409,14 +409,15 @@
     <footer class="footer">
       <div class="container">
         <div class="footer-bottom">
-          <p>© 2024 Asadullah Dal. All rights reserved.</p>
+          <p>© <span id="footer-year">2026</span> Asadullah Dal. All rights reserved.</p>
+          <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
         </div>
       </div>
     </footer>
 
     <script>
       // ===== MediaPipe Course Countdown =====
-      const COURSE_LAUNCH_ISO = '2026-01-15T20:00:00+05:00';
+      const COURSE_LAUNCH_ISO = '2026-08-15T20:00:00+05:00';
 
       function pad2(n) { return String(n).padStart(2, '0'); }
 
