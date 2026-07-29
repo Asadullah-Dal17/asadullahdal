@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet" />
 
     <!-- Font Awesome -->
@@ -39,42 +39,22 @@
     </script>
 </head>
 
-<body>
+<body data-loader-text="Fetching Articles...">
     <!-- Enhanced Cyber Background Animation -->
     <div class="bg-animated">
         <canvas id="bg-canvas"></canvas>
 
-        <!-- Loading Screen -->
-        <div class="loading-screen" id="loading-screen">
-            <div class="loading-container">
-                <div class="loading-logo">
-                    <div class="logo-text">AD</div>
-                </div>
-                <div class="loading-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill"></div>
-                    </div>
-                </div>
-                <div class="loading-text">Fetching Articles...</div>
-            </div>
-        </div>
+        <!-- Loading Screen injected by assets/js/nav.js -->
 
         <!-- Navbar -->
         <nav class="nav">
             <div class="nav-container">
                 <a aria-label="Home" class="logo" href="index.html">AD</a>
                 <div class="nav-links">
-                    <a class="nav-link" href="index.html#about">About</a>
-                    <a class="nav-link" href="index.html#skills">Skills</a>
-                    <a class="nav-link" href="index.html#projects">Projects</a>
-                    <a class="nav-link" href="index.html#courses">Courses</a>
-                    <a class="nav-link" href="videos.html">YouTube</a>
-                    <a class="nav-link active" href="blog.html">Blog</a>
-                    <a class="nav-link" href="index.html#contact">Contact</a>
+                    <!-- populated by assets/js/nav.js -->
                 </div>
                 <div class="nav-actions">
-                    <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle"
-                        style="position: relative; top: auto; right: auto; width: 40px; height: 40px; font-size: 1rem;">
+                    <button aria-label="Toggle dark mode" class="dark-mode-toggle nav-inline" id="darkModeToggle">
                         <i class="fas fa-moon" id="darkModeIcon"></i>
                     </button>
                     <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
@@ -94,13 +74,7 @@
                     </button>
                 </div>
                 <nav class="mobile-nav">
-                    <a class="mobile-nav-link" href="index.html#about">About</a>
-                    <a class="mobile-nav-link" href="index.html#skills">Skills</a>
-                    <a class="mobile-nav-link" href="index.html#projects">Projects</a>
-                    <a class="mobile-nav-link" href="index.html#courses">Courses</a>
-                    <a class="mobile-nav-link" href="videos.html">YouTube</a>
-                    <a class="mobile-nav-link active" href="blog.html">Blog</a>
-                    <a class="mobile-nav-link" href="index.html#contact">Contact</a>
+                    <!-- populated by assets/js/nav.js -->
                 </nav>
             </div>
         </div>
@@ -137,62 +111,13 @@
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-about">
-                        <h3>Asadullah Dal</h3>
-                        <p>Computer Vision Developer & AI Educator</p>
-                        <p>Creating innovative AI solutions and educating the next generation of developers through
-                            practical
-                            computer
-                            vision applications.</p>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Quick Links</h4>
-                        <div class="footer-link-grid">
-                            <a href="index.html#about">About</a>
-                            <a href="index.html#skills">Skills</a>
-                            <a href="index.html#projects">Projects</a>
-                            <a href="index.html#courses">Courses</a>
-                            <a href="videos.html">YouTube</a>
-                            <a href="blog.html">Blog</a>
-                            <a href="index.html#services">Services</a>
-                            <a href="index.html#contact">Contact</a>
-                        </div>
-                    </div>
-                    <div class="footer-social">
-                        <h4>Connect With Me</h4>
-                        <div class="social-links">
-                            <a aria-label="GitHub" class="social-link" href="https://github.com/Asadullah-Dal17"
-                                target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a aria-label="LinkedIn" class="social-link"
-                                href="https://www.linkedin.com/in/asadullah-dal/" target="_blank"
-                                rel="noopener noreferrer">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a aria-label="YouTube" class="social-link" href="https://youtube.com/@asadullah-dal"
-                                target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                            <a aria-label="Instagram" class="social-link" href="https://www.instagram.com/aiphile17"
-                                target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>© 2024 Asadullah Dal. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
+        <!-- Footer — populated by assets/js/footer.js -->
+        <footer class="footer" data-shared-footer></footer>
 
         <!-- Scripts -->
         <script src="assets/js/canvas-bg.js"></script>
+        <script src="assets/js/nav.js"></script>
+        <script src="assets/js/footer.js"></script>
         <script src="assets/js/scripts.js"></script>
         <script src="assets/js/blog.js"></script>
     </div> <!-- End .bg-animated -->

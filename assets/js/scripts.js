@@ -196,7 +196,8 @@ function setupBackToTop() {
 
 /* ---------- Scroll Animations + Skill Bars ---------- */
 function setupAnimations() {
-  const fadeEls = qsa('.project-card, .skill-card, .skill-category-card, .service-card, .course-card, .syllabus-card, .testimonial-card, .timeline-content');
+  // Hardcoded class list for backward compat + [data-animate] for any future element
+  const fadeEls = qsa('.project-card, .skill-card, .skill-category-card, .service-card, .course-card, .syllabus-card, .testimonial-card, .timeline-content, [data-animate]');
   fadeEls.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(25px)';

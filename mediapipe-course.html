@@ -35,19 +35,21 @@
   <meta name="twitter:image"
     content="https://asadullah-dal17.github.io/asadullahdal/assets/images/mediapipe-course-thumb.png" />
   <meta name="twitter:creator" content="@aiphile17" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const saved = localStorage.getItem('darkMode');
-    window.initialTheme = saved === null ? (prefersDark ? 'dark' : 'light') : (saved === 'true' ? 'dark' : 'light');
-    if (window.initialTheme === 'dark') document.documentElement.classList.add('dark-mode');
+    (function () {
+      const darkMode = localStorage.getItem('darkMode') === 'true' ||
+        (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (darkMode) {
+        document.documentElement.classList.add('dark-mode');
+      }
+      window.initialTheme = darkMode ? 'dark' : 'light';
+    })();
   </script>
   <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
   <link rel="manifest" href="site.webmanifest" />
@@ -113,22 +115,30 @@
       <div class="nav-container">
         <a href="index.html" class="logo" aria-label="Home">AD</a>
         <div class="nav-links">
-          <a class="nav-link" href="index.html#about">About</a>
-          <a class="nav-link" href="index.html#skills">Skills</a>
-          <a class="nav-link" href="index.html#projects">Projects</a>
-          <a class="nav-link" href="index.html#courses">Courses</a>
-          <a class="nav-link" href="index.html#services">Services</a>
-          <a class="nav-link" href="index.html#contact">Contact</a>
+          <!-- populated by assets/js/nav.js -->
         </div>
         <div class="nav-actions">
-          <a class="btn btn-secondary whatsapp-link"
-            href="https://wa.me/923330366072?text=Hi%20Asadullah!%20I%20want%20to%20know%20about%20your%20MediaPipe%20course%20launch."
-            target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </a>
+          <button aria-label="Toggle mobile menu" aria-expanded="false" class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+      <div class="mobile-menu">
+        <div class="mobile-menu-header">
+          <div class="mobile-logo">AD</div>
+          <button class="mobile-menu-close" id="mobile-menu-close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <nav class="mobile-nav">
+          <!-- populated by assets/js/nav.js -->
+        </nav>
+      </div>
+    </div>
 
     <!-- Hero Section -->
     <header class="section course-hero-section">
@@ -415,68 +425,12 @@
       </div>
     </footer>
 
-    <script>
-      // ===== MediaPipe Course Countdown =====
-      const COURSE_LAUNCH_ISO = '2026-08-15T20:00:00+05:00';
-
-      function pad2(n) { return String(n).padStart(2, '0'); }
-
-      function formatLaunchDate(isoString) {
-        const date = new Date(isoString);
-        if (isNaN(date.getTime())) return 'TBA';
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' };
-        return date.toLocaleDateString('en-US', options);
-      }
-
-      function updateCountdown() {
-        const target = new Date(COURSE_LAUNCH_ISO).getTime();
-        const now = Date.now();
-        const diff = target - now;
-
-        const daysEl = document.getElementById('cd-days');
-        const hoursEl = document.getElementById('cd-hours');
-        const minsEl = document.getElementById('cd-mins');
-        const secsEl = document.getElementById('cd-secs');
-        const dateDisplay = document.getElementById('launchDateDisplay');
-
-        if (dateDisplay) {
-          dateDisplay.textContent = formatLaunchDate(COURSE_LAUNCH_ISO);
-        }
-
-        if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
-
-        if (isNaN(target)) {
-          daysEl.textContent = '--'; hoursEl.textContent = '--'; minsEl.textContent = '--'; secsEl.textContent = '--';
-          return;
-        }
-
-        if (diff <= 0) {
-          daysEl.textContent = '00'; hoursEl.textContent = '00'; minsEl.textContent = '00'; secsEl.textContent = '00';
-          if (dateDisplay) dateDisplay.textContent = 'Course is Live!';
-          return;
-        }
-
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-        daysEl.textContent = String(days);
-        hoursEl.textContent = pad2(hours);
-        minsEl.textContent = pad2(mins);
-        secsEl.textContent = pad2(secs);
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => { updateCountdown(); setInterval(updateCountdown, 1000); });
-      } else {
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-      }
-    </script>
-
-    <script src="assets/js/scripts.js"></script>
     <script src="assets/js/canvas-bg.js"></script>
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/scripts.js"></script>
+    <script src="assets/js/course.js"></script>
+
+
   </div> <!-- End .bg-animated -->
 </body>
 

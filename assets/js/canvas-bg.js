@@ -7,6 +7,11 @@
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) return;
 
+    // Allow individual pages to opt out of the background animation
+    // by adding data-no-canvas attribute to <body>
+    if (document.body && document.body.dataset.noCanvas) return;
+
+
     const ctx = canvas.getContext('2d');
     let width, height;
 
