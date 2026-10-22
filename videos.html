@@ -2,168 +2,157 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Video Gallery | Asadullah Dal</title>
-    <meta name="description"
-        content="Watch the latest computer vision tutorials and tech reviews from Asadullah Dal." />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Video Gallery | Asadullah Dal</title>
+  <meta content="Watch the latest computer vision tutorials and tech reviews from Asadullah Dal." name="description" />
 
-    <!-- Favicon -->
-    <link
-        href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;&lt;text y=".9em" font-size="90" fill="%234CAF50"&gt;AD&lt;/text&gt;&lt;/svg&gt;'
-        rel="icon" type="image/svg+xml" />
+  <!-- Favicon -->
+  <link
+    href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;&lt;text y=".9em" font-size="90" fill="%234CAF50"&gt;AD&lt;/text&gt;&lt;/svg&gt;'
+    rel="icon" type="image/svg+xml" />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- Styles -->
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <link href="assets/css/videos.css" rel="stylesheet" />
+  <!-- Stylesheets -->
+  <link href="assets/css/styles.css" rel="stylesheet" />
+  <link href="assets/css/animated-bg.css" rel="stylesheet" />
+  <link href="assets/css/videos.css" rel="stylesheet" />
 
-    <script>
-        // Theme setup
-        (function () {
-            const darkMode = localStorage.getItem('darkMode') === 'true' ||
-                (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (darkMode) {
-                document.documentElement.classList.add('dark-mode');
-            }
-            window.initialTheme = darkMode ? 'dark' : 'light';
-        })();
-    </script>
+  <script>
+    (function () {
+      const darkMode = localStorage.getItem('darkMode') === 'true' ||
+        (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (darkMode) {
+        document.documentElement.classList.add('dark-mode');
+      }
+      window.initialTheme = darkMode ? 'dark' : 'light';
+    })();
+  </script>
 </head>
 
-
 <body data-loader-text="Loading Gallery...">
-    <!-- Enhanced Cyber Background Animation -->
-    <div class="bg-animated">
-        <canvas id="bg-canvas"></canvas>
+  <!-- Ambient Static Background -->
+  <div class="ambient-orbs" aria-hidden="true"></div>
 
-        <!-- Loading Screen injected by assets/js/nav.js -->
+  <!-- Navigation -->
+  <header class="nav" role="banner">
+    <div class="nav-container">
+      <a aria-label="Home" class="logo" href="index.html">AD</a>
+      <nav aria-label="Main navigation" class="nav-links">
+        <!-- populated by assets/js/nav.js -->
+      </nav>
+      <div class="nav-actions">
+        <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+        </button>
+        <button aria-expanded="false" aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
 
-        <!-- Navbar -->
-        <nav class="nav">
-            <div class="nav-container">
-                <a aria-label="Home" class="logo" href="index.html">AD</a>
-                <div class="nav-links">
-                    <!-- populated by assets/js/nav.js -->
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu">
+      <div class="mobile-menu-header">
+        <div class="mobile-logo">AD</div>
+        <button aria-label="Close mobile menu" class="mobile-menu-close" id="mobile-menu-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav aria-label="Mobile navigation" class="mobile-nav">
+        <!-- populated by assets/js/nav.js -->
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <section class="video-page-header">
+      <div class="container">
+        <h1>Video Gallery</h1>
+        <p>Explore my latest tutorials, reviews, and insights on Computer Vision.</p>
+      </div>
+    </section>
+
+    <!-- Player Section -->
+    <section class="player-section" id="player-anchor">
+      <div class="container">
+        <div class="player-wrapper">
+          <!-- Video Area -->
+          <div class="video-embed-container" id="embed-container">
+            <!-- Facade / Iframe loaded by JS -->
+          </div>
+
+          <!-- Video Details Area -->
+          <div class="current-video-details">
+            <div class="meta-row">
+              <div class="video-info-main">
+                <div class="current-tags">
+                  <span id="current-date"><i class="far fa-clock"></i> ...</span>
+                  <span style="opacity: 0.4;">|</span>
+                  <span>LATEST UPLOAD</span>
                 </div>
-                <div class="nav-actions">
-                    <button aria-label="Toggle dark mode" class="dark-mode-toggle nav-inline" id="darkModeToggle">
-                        <i class="fas fa-moon" id="darkModeIcon"></i>
-                    </button>
-                    <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
+                <h2 class="current-title" id="current-title">Select a video to play</h2>
+
+                <div class="action-row">
+                  <a class="btn btn-primary" href="#" id="btn-watch-yt" rel="noopener noreferrer" target="_blank">
+                    <i class="fab fa-youtube"></i> Watch on YouTube
+                  </a>
+                  <a class="btn btn-secondary" href="https://youtube.com/@asadullah-dal/videos" rel="noopener noreferrer" target="_blank">
+                    Browse Channel
+                  </a>
                 </div>
+              </div>
+
+              <!-- Stats -->
+              <div class="stat-box-container">
+                <div class="stat-box">
+                  <span class="stat-number" id="stat-subs">...</span>
+                  <span class="stat-label">Subscribers</span>
+                </div>
+                <div class="stat-box">
+                  <span class="stat-number" id="stat-videos">...</span>
+                  <span class="stat-label">Videos</span>
+                </div>
+              </div>
             </div>
-        </nav>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-                    <div class="mobile-logo">AD</div>
-                    <button class="mobile-menu-close" id="mobile-menu-close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <nav class="mobile-nav">
-                    <!-- populated by assets/js/nav.js -->
-                </nav>
-            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Main Content -->
-        <main>
-            <section class="video-page-header">
-                <div class="container">
-                    <h1>Video Gallery</h1>
-                    <p>Explore my latest tutorials, reviews, and insights on Computer Vision.</p>
-                </div>
-            </section>
+    <!-- Video Grid Section -->
+    <div class="container">
+      <div class="grid-header">
+        <h3>Recent Uploads</h3>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Updated Daily</div>
+      </div>
 
-            <!-- Player Section -->
-            <section class="player-section" id="player-anchor">
-                <div class="container">
-                    <div class="player-wrapper">
-                        <!-- Video Area -->
-                        <div class="video-embed-container" id="embed-container">
-                            <!-- Facade loaded by JS -->
-                        </div>
+      <div class="video-grid" id="video-grid" role="list">
+        <!-- Videos injected dynamically by assets/js/videos.js -->
+      </div>
+    </div>
+  </main>
 
-                        <!-- Info Area -->
-                        <div class="current-video-details">
-                            <div class="meta-row">
-                                <div class="video-info-main">
-                                    <div class="current-tags">
-                                        <span id="current-date"><i class="far fa-clock"></i> ...</span>
-                                        <span style="color: var(--text-muted);">|</span>
-                                        <span>LATEST UPLOAD</span>
-                                    </div>
-                                    <h2 class="current-title" id="current-title">Select a video to play</h2>
+  <!-- Footer (Populated by assets/js/footer.js) -->
+  <footer class="footer" data-shared-footer></footer>
 
-                                    <div class="action-row">
-                                        <a href="#" target="_blank" class="btn btn-primary" id="btn-watch-yt">
-                                            <i class="fab fa-youtube"></i> Watch on YouTube
-                                        </a>
-                                        <a href="https://youtube.com/@asadullah-dal/videos" target="_blank"
-                                            class="btn btn-secondary">
-                                            Browse Channel
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <!-- Stats -->
-                                <div class="stat-box-container">
-                                    <div class="stat-box">
-                                        <span class="stat-number" id="stat-subs">...</span>
-                                        <span class="stat-label">Subscribers</span>
-                                    </div>
-                                    <div class="stat-box">
-                                        <span class="stat-number" id="stat-videos">...</span>
-                                        <span class="stat-label">Videos</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Grid Section -->
-            <section class="container">
-                <div class="grid-header">
-                    <h3>Recent Uploads</h3>
-                    <div style="font-size: 0.9rem; color: var(--text-muted);">
-                        Updated Daily
-                    </div>
-                </div>
-
-                <div class="video-grid" id="video-grid" role="list">
-                    <!-- Videos injected here -->
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer — populated by assets/js/footer.js -->
-        <footer class="footer" data-shared-footer></footer>
-
-        <!-- Scripts -->
-        <script src="assets/js/canvas-bg.js"></script>
-        <script src="assets/js/nav.js"></script>
-        <script src="assets/js/footer.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        <script src="assets/js/videos.js"></script>
-
-    </div> <!-- End .bg-animated -->
+  <!-- Scripts -->
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/footer.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/videos.js"></script>
 </body>
 
 </html>

@@ -360,7 +360,7 @@ function setupFAQ() {
   });
 }
 
-/* ---------- Contact Form (safe) ---------- */
+/* ---------- Contact Form (safe with mailto fallback) ---------- */
 function setupContactForm() {
   const form = qs('#contactForm');
   if (!form) return;
@@ -371,8 +371,31 @@ function setupContactForm() {
     const honeypot = qs('input[name="website"]', form);
     if (honeypot && honeypot.value) return;
 
+    const nameInput = qs('#name', form);
+    const emailInput = qs('#email', form);
+    const messageInput = qs('#message', form);
     const btn = qs('button[type="submit"]', form);
     const original = btn ? btn.innerHTML : '';
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    const openMailtoFallback = () => {
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+      const body = encodeURIComponent(`Hi Asadullah,\n\n${message}\n\nFrom: ${name} (${email})`);
+      window.location.href = `mailto:asadullah92c@gmail.com?subject=${subject}&body=${body}`;
+      showNotification('Opening email client to send directly to Asadullah...', 'info');
+    };
+
+    const endpoint = 'https://formspree.io/f/your-formspree-id';
+
+    // If using default placeholder, launch mailto directly without failing
+    if (endpoint.includes('your-formspree-id')) {
+      openMailtoFallback();
+      form.reset();
+      return;
+    }
 
     try {
       if (btn) {
@@ -380,10 +403,7 @@ function setupContactForm() {
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       }
 
-      // TODO: Replace with your Formspree ID
-      const endpoint = 'https://formspree.io/f/your-formspree-id';
       const data = new FormData(form);
-
       const res = await fetch(endpoint, {
         method: 'POST',
         body: data,
@@ -399,12 +419,185 @@ function setupContactForm() {
       setTimeout(() => { if (btn) { btn.disabled = false; btn.innerHTML = original; } }, 2500);
 
     } catch (err) {
-      console.error(err);
-      showNotification('Failed to send. Please email me directly at asadullah92c@gmail.com', 'error');
+      console.warn('Form submission error, falling back to mailto:', err);
+      openMailtoFallback();
       if (btn) {
         btn.disabled = false;
         btn.innerHTML = original;
       }
+    }
+  });
+}
+
+/* ---------- Instant Site Search (Command Palette) ---------- */
+function setupSearch() {
+  const toggleBtn = qs('#searchToggle');
+  const overlay = qs('#searchOverlay');
+  const closeBtn = qs('#searchClose');
+  const input = qs('#searchInput');
+  const resultsContainer = qs('#searchResults');
+
+  if (!overlay || !input || !resultsContainer) return;
+
+  let selectedIndex = -1;
+
+  // Build searchable index from existing DOM elements
+  const buildIndex = () => {
+    const items = [];
+
+    // Core Sections
+    const sectionMap = [
+      { id: '#about', title: 'About Me', type: 'Section', snippet: 'Experience, mission, background and bio' },
+      { id: '#skills', title: 'Technical Skills', type: 'Section', snippet: 'Python, C++, OpenCV, MediaPipe, YOLO, TensorFlow' },
+      { id: '#projects', title: 'Featured Projects', type: 'Section', snippet: 'Robotics, AR, Gesture interfaces, tracking' },
+      { id: '#popular-repos', title: 'Pinned Repositories', type: 'Section', snippet: 'Distance measurement, gaze estimation, YOLOv4' },
+      { id: '#courses', title: 'Free Courses & Tutorials', type: 'Section', snippet: 'MediaPipe course, OpenCV masterclass, YOLO tutorials' },
+      { id: '#services', title: 'Services & Freelance', type: 'Section', snippet: 'Custom CV solutions, consulting, content creation' },
+      { id: '#faq', title: 'Frequently Asked Questions', type: 'Section', snippet: 'Questions about technologies, courses, freelance' },
+      { id: '#contact', title: 'Contact & Hire', type: 'Section', snippet: 'Email, LinkedIn, YouTube, GitHub' }
+    ];
+    sectionMap.forEach(s => {
+      if (qs(s.id)) items.push({ title: s.title, type: s.type, snippet: s.snippet, href: s.id });
+    });
+
+    // Projects
+    qsa('.project-card').forEach(card => {
+      const title = qs('.project-title', card)?.textContent?.trim() || '';
+      const snippet = qs('.project-description', card)?.textContent?.trim() || '';
+      const tags = qsa('.tag', card).map(t => t.textContent.trim()).join(' ');
+      const link = qs('.project-link-primary', card)?.getAttribute('href') || '#projects';
+      if (title) items.push({ title, type: 'Project', snippet, tags, href: link });
+    });
+
+    // Courses
+    qsa('.course-card').forEach(card => {
+      const title = qs('.course-title', card)?.textContent?.trim() || '';
+      const snippet = qs('.course-description', card)?.textContent?.trim() || '';
+      const link = qs('a.btn', card)?.getAttribute('href') || '#courses';
+      if (title) items.push({ title, type: 'Course', snippet, href: link });
+    });
+
+    // Repos
+    qsa('.repo-card').forEach(card => {
+      const title = qs('.repo-name', card)?.textContent?.trim() || '';
+      const snippet = qs('.repo-description', card)?.textContent?.trim() || '';
+      const link = qs('.repo-name', card)?.getAttribute('href') || '#popular-repos';
+      if (title) items.push({ title, type: 'Repo', snippet, href: link });
+    });
+
+    return items;
+  };
+
+  let searchIndex = [];
+
+  const openSearch = () => {
+    searchIndex = buildIndex();
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    selectedIndex = -1;
+    input.value = '';
+    renderResults(searchIndex.slice(0, 5));
+    setTimeout(() => input.focus(), 50);
+  };
+
+  const closeSearch = () => {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  const renderResults = (matches) => {
+    if (!matches.length) {
+      resultsContainer.innerHTML = '<div class="search-empty-state">No matching projects, skills, or courses found.</div>';
+      return;
+    }
+
+    resultsContainer.innerHTML = matches.map((item, idx) => `
+      <a href="${item.href}" class="search-result-item ${idx === selectedIndex ? 'selected' : ''}" data-idx="${idx}" ${item.href.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''}>
+        <div class="search-result-main">
+          <div class="search-result-title">${item.title}</div>
+          <div class="search-result-snippet">${item.snippet.slice(0, 85)}${item.snippet.length > 85 ? '...' : ''}</div>
+        </div>
+        <span class="search-result-type">${item.type}</span>
+      </a>
+    `).join('') + `
+      <div class="search-hint">
+        <span>Use <kbd>↑</kbd> <kbd>↓</kbd> to navigate, <kbd>Enter</kbd> to select</span>
+        <span><kbd>ESC</kbd> to close</span>
+      </div>
+    `;
+
+    qsa('.search-result-item', resultsContainer).forEach(el => {
+      el.addEventListener('click', () => {
+        closeSearch();
+      });
+    });
+  };
+
+  const doSearch = (query) => {
+    const q = query.trim().toLowerCase();
+    selectedIndex = -1;
+    if (!q) {
+      renderResults(searchIndex.slice(0, 5));
+      return;
+    }
+    const matches = searchIndex.filter(item => {
+      const t = item.title.toLowerCase();
+      const s = item.snippet.toLowerCase();
+      const tags = (item.tags || '').toLowerCase();
+      const type = item.type.toLowerCase();
+      return t.includes(q) || s.includes(q) || tags.includes(q) || type.includes(q);
+    });
+    renderResults(matches);
+  };
+
+  toggleBtn?.addEventListener('click', openSearch);
+  closeBtn?.addEventListener('click', closeSearch);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeSearch();
+  });
+
+  input.addEventListener('input', (e) => doSearch(e.target.value));
+
+  // Keyboard navigation & global shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Open on Ctrl+K, Cmd+K, or slash (if not in text input)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (overlay.classList.contains('active')) closeSearch();
+      else openSearch();
+      return;
+    }
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      openSearch();
+      return;
+    }
+
+    if (!overlay.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeSearch();
+      return;
+    }
+
+    const items = qsa('.search-result-item', resultsContainer);
+    if (!items.length) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = (selectedIndex + 1) % items.length;
+      items.forEach((item, i) => item.classList.toggle('selected', i === selectedIndex));
+      items[selectedIndex]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = (selectedIndex - 1 + items.length) % items.length;
+      items.forEach((item, i) => item.classList.toggle('selected', i === selectedIndex));
+      items[selectedIndex]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+      e.preventDefault();
+      items[selectedIndex]?.click();
     }
   });
 }
@@ -427,6 +620,7 @@ function init() {
   new ThemeManager();
 
   setupMobileMenu();
+  setupSearch();
   setupSmoothScrolling();
   setupBackToTop();
   setupAnimations();

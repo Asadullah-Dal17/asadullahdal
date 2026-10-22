@@ -2,125 +2,120 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Blog | Asadullah Dal</title>
-    <meta name="description" content="Read the latest articles on Computer Vision, AI, and Tech." />
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Blog | Asadullah Dal</title>
+  <meta name="description" content="Read the latest articles on Computer Vision, AI, and Tech." />
 
-    <!-- Favicon -->
-    <link
-        href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;&lt;text y=".9em" font-size="90" fill="%234CAF50"&gt;AD&lt;/text&gt;&lt;/svg&gt;'
-        rel="icon" type="image/svg+xml" />
+  <!-- Favicon -->
+  <link
+    href='data:image/svg+xml,&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"&gt;&lt;text y=".9em" font-size="90" fill="%234CAF50"&gt;AD&lt;/text&gt;&lt;/svg&gt;'
+    rel="icon" type="image/svg+xml" />
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- Styles -->
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <link href="assets/css/blog.css" rel="stylesheet" />
+  <!-- Stylesheets -->
+  <link href="assets/css/styles.css" rel="stylesheet" />
+  <link href="assets/css/animated-bg.css" rel="stylesheet" />
+  <link href="assets/css/blog.css" rel="stylesheet" />
 
-    <script>
-        // Theme setup
-        (function () {
-            const darkMode = localStorage.getItem('darkMode') === 'true' ||
-                (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            if (darkMode) {
-                document.documentElement.classList.add('dark-mode');
-            }
-            window.initialTheme = darkMode ? 'dark' : 'light';
-        })();
-    </script>
+  <script>
+    (function () {
+      const darkMode = localStorage.getItem('darkMode') === 'true' ||
+        (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (darkMode) {
+        document.documentElement.classList.add('dark-mode');
+      }
+      window.initialTheme = darkMode ? 'dark' : 'light';
+    })();
+  </script>
 </head>
 
 <body data-loader-text="Fetching Articles...">
-    <!-- Enhanced Cyber Background Animation -->
-    <div class="bg-animated">
-        <canvas id="bg-canvas"></canvas>
+  <!-- Ambient Static Background -->
+  <div class="ambient-orbs" aria-hidden="true"></div>
 
-        <!-- Loading Screen injected by assets/js/nav.js -->
+  <!-- Navigation -->
+  <header class="nav" role="banner">
+    <div class="nav-container">
+      <a aria-label="Home" class="logo" href="index.html">AD</a>
+      <nav aria-label="Main navigation" class="nav-links">
+        <!-- populated by assets/js/nav.js -->
+      </nav>
+      <div class="nav-actions">
+        <button aria-label="Toggle dark mode" class="dark-mode-toggle" id="darkModeToggle">
+          <i class="fas fa-moon" id="darkModeIcon"></i>
+        </button>
+        <button aria-expanded="false" aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
 
-        <!-- Navbar -->
-        <nav class="nav">
-            <div class="nav-container">
-                <a aria-label="Home" class="logo" href="index.html">AD</a>
-                <div class="nav-links">
-                    <!-- populated by assets/js/nav.js -->
-                </div>
-                <div class="nav-actions">
-                    <button aria-label="Toggle dark mode" class="dark-mode-toggle nav-inline" id="darkModeToggle">
-                        <i class="fas fa-moon" id="darkModeIcon"></i>
-                    </button>
-                    <button aria-label="Toggle mobile menu" class="mobile-menu-toggle" id="mobile-menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu">
+      <div class="mobile-menu-header">
+        <div class="mobile-logo">AD</div>
+        <button aria-label="Close mobile menu" class="mobile-menu-close" id="mobile-menu-close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav aria-label="Mobile navigation" class="mobile-nav">
+        <!-- populated by assets/js/nav.js -->
+      </nav>
+    </div>
+  </div>
 
-        <!-- Mobile Menu -->
-        <div class="mobile-menu-overlay" id="mobile-menu-overlay">
-            <div class="mobile-menu">
-                <div class="mobile-menu-header">
-                    <div class="mobile-logo">AD</div>
-                    <button class="mobile-menu-close" id="mobile-menu-close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <nav class="mobile-nav">
-                    <!-- populated by assets/js/nav.js -->
-                </nav>
-            </div>
+  <!-- Main Content -->
+  <main>
+    <section class="blog-hero">
+      <div class="container">
+        <h1>From the Blog</h1>
+        <p>Thoughts, tutorials, and deep dives into Computer Vision and AI.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Toolbar -->
+      <div class="blog-toolbar">
+        <div class="filter-group">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="tutorial">Tutorials</button>
+          <button class="filter-chip" data-filter="computer-vision">Computer Vision</button>
+          <button class="filter-chip" data-filter="python">Python</button>
         </div>
 
-        <!-- Main Content -->
-        <main>
-            <section class="blog-hero">
-                <div class="container">
-                    <h1>From the Blog</h1>
-                    <p>Thoughts, tutorials, and deep dives into Computer Vision and AI.</p>
-                </div>
-            </section>
+        <div class="search-group">
+          <i class="fas fa-search search-icon"></i>
+          <input id="search-input" placeholder="Search articles..." type="text" />
+        </div>
+      </div>
 
-            <section class="container">
-                <!-- Toolbar -->
-                <div class="blog-toolbar">
-                    <div class="filter-group">
-                        <button class="filter-chip active" data-filter="all">All</button>
-                        <button class="filter-chip" data-filter="tutorial">Tutorials</button>
-                        <button class="filter-chip" data-filter="computer-vision">Computer Vision</button>
-                        <button class="filter-chip" data-filter="python">Python</button>
-                    </div>
+      <!-- Blog Posts Grid -->
+      <div class="blog-grid" id="blog-grid">
+        <!-- Dynamic posts rendered by assets/js/blog.js -->
+      </div>
+    </div>
+  </main>
 
-                    <div class="search-group">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" id="search-input" placeholder="Search articles...">
-                    </div>
-                </div>
+  <!-- Footer (Populated by assets/js/footer.js) -->
+  <footer class="footer" data-shared-footer></footer>
 
-                <!-- Grid -->
-                <div class="blog-grid" id="blog-grid">
-                    <!-- JS renders here -->
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer — populated by assets/js/footer.js -->
-        <footer class="footer" data-shared-footer></footer>
-
-        <!-- Scripts -->
-        <script src="assets/js/canvas-bg.js"></script>
-        <script src="assets/js/nav.js"></script>
-        <script src="assets/js/footer.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        <script src="assets/js/blog.js"></script>
-    </div> <!-- End .bg-animated -->
+  <!-- Scripts -->
+  <script src="assets/js/nav.js"></script>
+  <script src="assets/js/footer.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script src="assets/js/blog.js"></script>
 </body>
 
 </html>

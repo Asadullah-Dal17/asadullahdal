@@ -1,43 +1,18 @@
-/* ================================
-   Animated Gradient Overlay
-   ================================ */
-.animated-gradient-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg,
-      rgba(13, 74, 43, 0.15) 0%,
-      rgba(30, 125, 50, 0.15) 25%,
-      rgba(102, 187, 106, 0.15) 50%,
-      rgba(30, 125, 50, 0.15) 75%,
-      rgba(13, 74, 43, 0.15) 100%);
-  background-size: 200% 200%;
-  animation: gradientShift 8s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;
+/* ==========================================================================
+   Static Ultra-Light Ambient Finish (Zero CPU Overhead)
+   Replaces heavy keyframe animations and canvas load with a clean, static,
+   ultra-lightweight ambient wash using the existing background and accent colors.
+   ========================================================================== */
+
+/* Ambient static wash container */
+.ambient-orbs,
+.hero-background,
+.bg-animated {
+  position: relative;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* ================================
-   Animated Grid Lines
-   ================================ */
-.animated-grid {
+/* Subtle, static radial gradients for editorial depth */
+.ambient-orbs {
   position: fixed;
   top: 0;
   left: 0;
@@ -45,62 +20,25 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.4;
+  overflow: hidden;
+  background: 
+    radial-gradient(circle at 10% 5%, rgba(76, 175, 80, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 95%, rgba(46, 125, 50, 0.04) 0%, transparent 45%);
 }
 
-.grid-line {
-  position: absolute;
-  background: linear-gradient(90deg, transparent 0%, rgb(76, 175, 80) 50%, transparent 100%);
+.dark-mode .ambient-orbs {
+  background: 
+    radial-gradient(circle at 10% 5%, rgba(76, 175, 80, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 95%, rgba(129, 199, 132, 0.04) 0%, transparent 45%);
 }
 
-.grid-line.horizontal {
-  width: 100%;
-  height: 1px;
-  animation: moveHorizontal 12s linear infinite;
-}
-
-.grid-line.vertical {
-  width: 1px;
-  height: 100%;
-  animation: moveVertical 12s linear infinite;
-}
-
-@keyframes moveHorizontal {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0.8;
-  }
-
-  90% {
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-@keyframes moveVertical {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0.8;
-  }
-
-  90% {
-    opacity: 0.8;
-  }
-
-  100% {
-    transform: translateX(100vw);
-    opacity: 0;
-  }
+/* Neutralize legacy animated elements completely without breaking HTML references */
+.ambient-orb,
+.hero-gradient-orb,
+.hero-grid-pattern,
+.animated-gradient-overlay,
+.animated-grid,
+.grid-line,
+#bg-canvas {
+  display: none !important;
 }
